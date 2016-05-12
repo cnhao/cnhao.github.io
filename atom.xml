@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-10T12:52:18.000Z</updated>
+  <updated>2016-05-12T05:00:19.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>plan</title>
+    <link href="http://yoursite.com/2016/05/12/plan/"/>
+    <id>http://yoursite.com/2016/05/12/plan/</id>
+    <published>2016-05-12T04:27:19.000Z</published>
+    <updated>2016-05-12T05:00:19.000Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;关于诗和远方&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;半年前我被元旦假期后1.4号的&lt;del&gt;股灾&lt;/del&gt;击败了.&lt;/p&gt;
+&lt;p&gt;健身计划被打乱,学习计划被打乱.&lt;/p&gt;
+&lt;p&gt;现在是时候卷土重来了&lt;/p&gt;
+&lt;p&gt;一年,我要发奋图强一年.&lt;/p&gt;
+&lt;p&gt;暂列点计划和想法,以后想到再来更新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/plan.png&quot; alt=&quot;mood&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;h4 id=&quot;重拾C&quot;&gt;&lt;a href=&quot;#重拾C&quot; class=&quot;headerlink&quot; title=&quot;重拾C++&quot;&gt;&lt;/a&gt;重拾C++&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;看书&lt;/li&gt;
+&lt;li&gt;业务可选c++开发&lt;/li&gt;
+&lt;li&gt;github开源项目&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;h4 id=&quot;python&quot;&gt;&lt;a href=&quot;#python&quot; class=&quot;headerlink&quot; title=&quot;python&quot;&gt;&lt;/a&gt;python&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;工作使用的基础上写一些小工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;h4 id=&quot;lua&quot;&gt;&lt;a href=&quot;#lua&quot; class=&quot;headerlink&quot; title=&quot;lua&quot;&gt;&lt;/a&gt;lua&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;研究开源cocos2d的代码学习使用cocos2d-lua&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;h4 id=&quot;swift&quot;&gt;&lt;a href=&quot;#swift&quot; class=&quot;headerlink&quot; title=&quot;swift&quot;&gt;&lt;/a&gt;swift&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;看开源小项目结合cocos等开发小的ios应用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;h4 id=&quot;充分了解微博广告部门业务和架构&quot;&gt;&lt;a href=&quot;#充分了解微博广告部门业务和架构&quot; class=&quot;headerlink&quot; title=&quot;充分了解微博广告部门业务和架构&quot;&gt;&lt;/a&gt;充分了解微博广告部门业务和架构&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;工作期间积累&lt;/li&gt;
+&lt;li&gt;精通自己的业务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;关于诗和远方&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;半年前我被元旦假期后1.4号的&lt;del&gt;股灾&lt;/del&gt;击败了.&lt;/p&gt;
+&lt;p&gt;健身计划被打乱,学习计划被打乱.&lt;/p&gt;
+&lt;p&gt;现在是时候卷土重来了&lt;/p&gt;
+&lt;p&gt;一年,我要发奋图强一年.&lt;/
+    
+    </summary>
+    
+    
+      <category term="Future" scheme="http://yoursite.com/tags/Future/"/>
+    
+  </entry>
   
   <entry>
     <title>MD</title>
