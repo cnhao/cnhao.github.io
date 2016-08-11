@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-10T16:21:04.000Z</updated>
+  <updated>2016-08-11T07:15:07.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我理解中的左值,右值和引用</title>
+    <link href="http://yoursite.com/2016/08/11/%E6%88%91%E7%90%86%E8%A7%A3%E4%B8%AD%E7%9A%84%E5%B7%A6%E5%80%BC-%E5%8F%B3%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/"/>
+    <id>http://yoursite.com/2016/08/11/我理解中的左值-右值和引用/</id>
+    <published>2016-08-11T05:40:28.000Z</published>
+    <updated>2016-08-11T07:15:07.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;具名的,可取址的称为左值&lt;/li&gt;
+&lt;li&gt;表达式,字面常量 &lt;code&gt;&amp;quot;abc&amp;quot;,2,true&lt;/code&gt;为纯右值&lt;/li&gt;
+&lt;li&gt;函数返回值,lambda表达式等为将亡值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无论是左值引用还是右值引用,都必须在立即初始化.因为他们并不拥有绑定对象的内存空间只是一个别名.&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;右值引用&quot;&gt;&lt;a href=&quot;#右值引用&quot; class=&quot;headerlink&quot; title=&quot;右值引用&quot;&gt;&lt;/a&gt;右值引用&lt;/h1&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T &amp;amp;&amp;amp; a = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T b = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;函数&lt;code&gt;ReturnRvalue()&lt;/code&gt;返回一个临时变量(&lt;strong&gt;将亡值&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;下面的b是常用的做法,把临时变量赋值给b,&lt;code&gt;ReturnRvalue()&lt;/code&gt;的生命周期在本行被执行后终结.&lt;/p&gt;
+&lt;p&gt;上面的a是右值引用,他绑定了临时变量,因为临时变量并不会再语句结束后死去,只要a活着,他就不会死.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;值得注意的是,如果函数的返回值是一个类的对象,那么当另一个函数直接调用此函数返回值时,如果是值引用会调用拷贝构造和析构函数.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;万能引用-常量左值引用&quot;&gt;&lt;a href=&quot;#万能引用-常量左值引用&quot; class=&quot;headerlink&quot; title=&quot;万能引用(常量左值引用)&quot;&gt;&lt;/a&gt;万能引用(常量左值引用)&lt;/h1&gt;&lt;p&gt;常量左值引用被称为万能引用,&lt;strong&gt;我猜是因为&lt;/strong&gt;因为他打破了左值引用不可以绑定右值的传说.&lt;/p&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T &amp;amp; e = ReturnRvalue(); &lt;span class=&quot;comment&quot;&gt;//传说,编译错误&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; T &amp;amp; f = ReturnRvalue(); &lt;span class=&quot;comment&quot;&gt;//打破了,一切正常&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt; &amp;amp; judgement = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//同上&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt; judgement = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//注意和第三行的区别哦&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;常量左值引用是只读的!!!!&lt;/p&gt;
+&lt;p&gt;目的是为了减少各种开销,内存,复制,拷贝构造,析构等.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;绕口令TIPS&quot;&gt;&lt;a href=&quot;#绕口令TIPS&quot; class=&quot;headerlink&quot; title=&quot;绕口令TIPS&quot;&gt;&lt;/a&gt;绕口令TIPS&lt;/h1&gt;&lt;p&gt;左值引用不可以绑定右值,下面是错误的&lt;br&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; c;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp;&amp;amp; d = c;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;非常量左值只能接受非常量左值对其进行初始化。&lt;/p&gt;
+&lt;hr&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>

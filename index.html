@@ -245,6 +245,125 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/11/我理解中的左值-右值和引用/" itemprop="url">
+                  我理解中的左值,右值和引用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-11T13:40:28+08:00" content="2016-08-11">
+              2016-08-11
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)<br>将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 <strong><em>续命</em></strong>.</p>
+<blockquote>
+<ul>
+<li>具名的,可取址的称为左值</li>
+<li>表达式,字面常量 <code>&quot;abc&quot;,2,true</code>为纯右值</li>
+<li>函数返回值,lambda表达式等为将亡值</li>
+</ul>
+</blockquote>
+<p>左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。</p>
+<p><strong>无论是左值引用还是右值引用,都必须在立即初始化.因为他们并不拥有绑定对象的内存空间只是一个别名.</strong></p>
+<hr>
+<h1 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T &amp;&amp; a = ReturnRvalue();</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T b = ReturnRvalue();</span><br></pre></td></tr></table></figure>
+<p>函数<code>ReturnRvalue()</code>返回一个临时变量(<strong>将亡值</strong>).</p>
+<p>下面的b是常用的做法,把临时变量赋值给b,<code>ReturnRvalue()</code>的生命周期在本行被执行后终结.</p>
+<p>上面的a是右值引用,他绑定了临时变量,因为临时变量并不会再语句结束后死去,只要a活着,他就不会死.</p>
+<p><strong><em>值得注意的是,如果函数的返回值是一个类的对象,那么当另一个函数直接调用此函数返回值时,如果是值引用会调用拷贝构造和析构函数.</em></strong></p>
+<hr>
+<h1 id="万能引用-常量左值引用"><a href="#万能引用-常量左值引用" class="headerlink" title="万能引用(常量左值引用)"></a>万能引用(常量左值引用)</h1><p>常量左值引用被称为万能引用,<strong>我猜是因为</strong>因为他打破了左值引用不可以绑定右值的传说.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">T &amp; e = ReturnRvalue(); <span class="comment">//传说,编译错误</span></span><br><span class="line"><span class="keyword">const</span> T &amp; f = ReturnRvalue(); <span class="comment">//打破了,一切正常</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">bool</span> &amp; judgement = <span class="literal">true</span>; <span class="comment">//同上</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">bool</span> judgement = <span class="literal">true</span>; <span class="comment">//注意和第三行的区别哦</span></span><br></pre></td></tr></table></figure>
+<p>常量左值引用是只读的!!!!</p>
+<p>目的是为了减少各种开销,内存,复制,拷贝构造,析构等.</p>
+<hr>
+<h1 id="绕口令TIPS"><a href="#绕口令TIPS" class="headerlink" title="绕口令TIPS"></a>绕口令TIPS</h1><p>左值引用不可以绑定右值,下面是错误的<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; d = c;</span><br></pre></td></tr></table></figure></p>
+<p>非常量左值只能接受非常量左值对其进行初始化。</p>
+<hr>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/11/hello-world/" itemprop="url">
                   Hello World
                 </a>
@@ -707,7 +826,7 @@ int main(){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

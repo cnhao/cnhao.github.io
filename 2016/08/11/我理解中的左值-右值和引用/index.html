@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HIIII..," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -86,66 +86,43 @@
 
 
 
-<meta name="description" content="念个经
-
-code1#include
-gg
-hehe
-wobuxinbuxin
-wobuxinbuxin
-
-hhe wo
+<meta name="description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.
 
 
-asd
-asd
-asd
+具名的,可取址的称为左值
+表达式,字面常量 &amp;quot;abc&amp;quot;,2,true为纯右值
+函数返回值,lambda表达式等为将亡值
 
-!@12345#include &amp;lt;stdio&amp;gt;int int main(int argc, char const *argv[]) &amp;#123;  /* code */  return 0;&amp;#125;
-#include &amp;lt;ios">
+
+左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。
+无论是左值引用还是右值引用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MD">
-<meta property="og:url" content="http://yoursite.com/2016/05/10/MD/index.html">
+<meta property="og:title" content="我理解中的左值,右值和引用">
+<meta property="og:url" content="http://yoursite.com/2016/08/11/我理解中的左值-右值和引用/index.html">
 <meta property="og:site_name" content="艾泽拉斯">
-<meta property="og:description" content="念个经
-
-code1#include
-gg
-hehe
-wobuxinbuxin
-wobuxinbuxin
-
-hhe wo
+<meta property="og:description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.
 
 
-asd
-asd
-asd
+具名的,可取址的称为左值
+表达式,字面常量 &amp;quot;abc&amp;quot;,2,true为纯右值
+函数返回值,lambda表达式等为将亡值
 
-!@12345#include &amp;lt;stdio&amp;gt;int int main(int argc, char const *argv[]) &amp;#123;  /* code */  return 0;&amp;#125;
-#include &amp;lt;ios">
-<meta property="og:image" content="http://o6ymgz5vj.bkt.clouddn.com/night_city.png">
-<meta property="og:updated_time" content="2016-08-10T16:43:24.000Z">
+
+左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。
+无论是左值引用还是右值引用">
+<meta property="og:updated_time" content="2016-08-11T07:15:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MD">
-<meta name="twitter:description" content="念个经
-
-code1#include
-gg
-hehe
-wobuxinbuxin
-wobuxinbuxin
-
-hhe wo
+<meta name="twitter:title" content="我理解中的左值,右值和引用">
+<meta name="twitter:description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.
 
 
-asd
-asd
-asd
+具名的,可取址的称为左值
+表达式,字面常量 &amp;quot;abc&amp;quot;,2,true为纯右值
+函数返回值,lambda表达式等为将亡值
 
-!@12345#include &amp;lt;stdio&amp;gt;int int main(int argc, char const *argv[]) &amp;#123;  /* code */  return 0;&amp;#125;
-#include &amp;lt;ios">
-<meta name="twitter:image" content="http://o6ymgz5vj.bkt.clouddn.com/night_city.png">
+
+左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。
+无论是左值引用还是右值引用">
 
 
 
@@ -163,7 +140,7 @@ asd
   };
 </script>
 
-  <title> MD | 艾泽拉斯 </title>
+  <title> 我理解中的左值,右值和引用 | 艾泽拉斯 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -293,7 +270,7 @@ asd
             
             
               
-                MD
+                我理解中的左值,右值和引用
               
             
           </h1>
@@ -305,8 +282,8 @@ asd
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-10T19:28:31+08:00" content="2016-05-10">
-              2016-05-10
+            <time itemprop="dateCreated" datetime="2016-08-11T13:40:28+08:00" content="2016-08-11">
+              2016-08-11
             </time>
           </span>
 
@@ -333,31 +310,32 @@ asd
       
 
       
-        <p>念个经</p>
-<p><img src="http://o6ymgz5vj.bkt.clouddn.com/night_city.png" alt="yeyeyeye"></p>
-<p><code>code</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include</span><br></pre></td></tr></table></figure></p>
-<p><strong>gg</strong></p>
-<p><em>hehe</em></p>
-<p><kbd><kbd>wobuxinbuxin</kbd></kbd></p>
-<p><del>wobuxinbuxin</del></p>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)<br>将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 <strong><em>续命</em></strong>.</p>
 <blockquote>
-<p>hhe wo</p>
+<ul>
+<li>具名的,可取址的称为左值</li>
+<li>表达式,字面常量 <code>&quot;abc&quot;,2,true</code>为纯右值</li>
+<li>函数返回值,lambda表达式等为将亡值</li>
+</ul>
 </blockquote>
-<ol>
-<li>asd</li>
-<li>asd</li>
-<li>asd</li>
-</ol>
-<h1 id=""><a href="#" class="headerlink" title="!@"></a>!@</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line">  return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>#include &lt;iostream&gt;
-int main(){
-
-}
-</code></pre><h3 id="万亿大神"><a href="#万亿大神" class="headerlink" title="万亿大神!"></a>万亿大神!</h3><p><a href="www.baidu.com" title="wanyidashen">万一大神</a></p>
-<p>  <kbd><kbd>大傻逼!!</kbd></kbd></p>
-<blockquote>
-<p>我阿萨德</p>
-</blockquote>
+<p>左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。</p>
+<p><strong>无论是左值引用还是右值引用,都必须在立即初始化.因为他们并不拥有绑定对象的内存空间只是一个别名.</strong></p>
+<hr>
+<h1 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T &amp;&amp; a = ReturnRvalue();</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T b = ReturnRvalue();</span><br></pre></td></tr></table></figure>
+<p>函数<code>ReturnRvalue()</code>返回一个临时变量(<strong>将亡值</strong>).</p>
+<p>下面的b是常用的做法,把临时变量赋值给b,<code>ReturnRvalue()</code>的生命周期在本行被执行后终结.</p>
+<p>上面的a是右值引用,他绑定了临时变量,因为临时变量并不会再语句结束后死去,只要a活着,他就不会死.</p>
+<p><strong><em>值得注意的是,如果函数的返回值是一个类的对象,那么当另一个函数直接调用此函数返回值时,如果是值引用会调用拷贝构造和析构函数.</em></strong></p>
+<hr>
+<h1 id="万能引用-常量左值引用"><a href="#万能引用-常量左值引用" class="headerlink" title="万能引用(常量左值引用)"></a>万能引用(常量左值引用)</h1><p>常量左值引用被称为万能引用,<strong>我猜是因为</strong>因为他打破了左值引用不可以绑定右值的传说.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">T &amp; e = ReturnRvalue(); <span class="comment">//传说,编译错误</span></span><br><span class="line"><span class="keyword">const</span> T &amp; f = ReturnRvalue(); <span class="comment">//打破了,一切正常</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">bool</span> &amp; judgement = <span class="literal">true</span>; <span class="comment">//同上</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">bool</span> judgement = <span class="literal">true</span>; <span class="comment">//注意和第三行的区别哦</span></span><br></pre></td></tr></table></figure>
+<p>常量左值引用是只读的!!!!</p>
+<p>目的是为了减少各种开销,内存,复制,拷贝构造,析构等.</p>
+<hr>
+<h1 id="绕口令TIPS"><a href="#绕口令TIPS" class="headerlink" title="绕口令TIPS"></a>绕口令TIPS</h1><p>左值引用不可以绑定右值,下面是错误的<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; d = c;</span><br></pre></td></tr></table></figure></p>
+<p>非常量左值只能接受非常量左值对其进行初始化。</p>
+<hr>
 
       
     </div>
@@ -377,28 +355,18 @@ int main(){
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/HIIII/" rel="tag">#HIIII..</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/10/My-New-Post/" rel="next" title="My New Post">
-                <i class="fa fa-chevron-left"></i> My New Post
+              <a href="/2016/08/11/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/12/plan/" rel="prev" title="plan">
-                plan <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -541,7 +509,7 @@ int main(){
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">!@</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#万亿大神"><span class="nav-number">1.0.1.</span> <span class="nav-text">万亿大神!</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#右值引用"><span class="nav-number">2.</span> <span class="nav-text">右值引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#万能引用-常量左值引用"><span class="nav-number">3.</span> <span class="nav-text">万能引用(常量左值引用)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绕口令TIPS"><span class="nav-number">4.</span> <span class="nav-text">绕口令TIPS</span></a></li></ol></div>
             
           </div>
         </section>
