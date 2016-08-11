@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-11T07:15:07.000Z</updated>
+  <updated>2016-08-11T07:27:52.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/08/11/%E6%88%91%E7%90%86%E8%A7%A3%E4%B8%AD%E7%9A%84%E5%B7%A6%E5%80%BC-%E5%8F%B3%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/"/>
     <id>http://yoursite.com/2016/08/11/我理解中的左值-右值和引用/</id>
     <published>2016-08-11T05:40:28.000Z</published>
-    <updated>2016-08-11T07:15:07.000Z</updated>
+    <updated>2016-08-11T07:27:52.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -45,8 +45,10 @@
 &lt;p&gt;常量左值引用是只读的!!!!&lt;/p&gt;
 &lt;p&gt;目的是为了减少各种开销,内存,复制,拷贝构造,析构等.&lt;/p&gt;
 &lt;hr&gt;
-&lt;h1 id=&quot;绕口令TIPS&quot;&gt;&lt;a href=&quot;#绕口令TIPS&quot; class=&quot;headerlink&quot; title=&quot;绕口令TIPS&quot;&gt;&lt;/a&gt;绕口令TIPS&lt;/h1&gt;&lt;p&gt;左值引用不可以绑定右值,下面是错误的&lt;br&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; c;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp;&amp;amp; d = c;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h1 id=&quot;TIPS&quot;&gt;&lt;a href=&quot;#TIPS&quot; class=&quot;headerlink&quot; title=&quot;TIPS&quot;&gt;&lt;/a&gt;TIPS&lt;/h1&gt;&lt;p&gt;左值引用不可以绑定右值,下面是错误的&lt;br&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; c;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp;&amp;amp; d = c;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;非常量左值只能接受非常量左值对其进行初始化。&lt;/p&gt;
+&lt;p&gt;标准库在 &lt;code&gt;&amp;lt;type_traits&amp;gt;&lt;/code&gt; &lt;code&gt;头文件中提供了3个模板类：is_rvalue_reference&lt;/code&gt;,&lt;code&gt;is_lvalue_reference&lt;/code&gt;,&lt;code&gt;is_reference&lt;/code&gt;,可供我们进行判断。比如:&lt;/p&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; is_rvalue_reference&amp;lt;&lt;span class=&quot;built_in&quot;&gt;string&lt;/span&gt; &amp;amp;&amp;amp;&amp;gt;::value;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;hr&gt;
 </content>
     
@@ -57,160 +59,31 @@
     </summary>
     
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/08/11/hello-world/"/>
-    <id>http://yoursite.com/2016/08/11/hello-world/</id>
-    <published>2016-08-10T16:21:04.000Z</published>
-    <updated>2016-08-10T16:21:04.000Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &amp;quot;My New Post&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>plan</title>
-    <link href="http://yoursite.com/2016/05/12/plan/"/>
-    <id>http://yoursite.com/2016/05/12/plan/</id>
-    <published>2016-05-12T04:27:19.000Z</published>
-    <updated>2016-05-12T05:00:19.000Z</updated>
-    
-    <content type="html">&lt;blockquote&gt;
-&lt;p&gt;关于诗和远方&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;半年前我被元旦假期后1.4号的&lt;del&gt;股灾&lt;/del&gt;击败了.&lt;/p&gt;
-&lt;p&gt;健身计划被打乱,学习计划被打乱.&lt;/p&gt;
-&lt;p&gt;现在是时候卷土重来了&lt;/p&gt;
-&lt;p&gt;一年,我要发奋图强一年.&lt;/p&gt;
-&lt;p&gt;暂列点计划和想法,以后想到再来更新&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/plan.png&quot; alt=&quot;mood&quot;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;h4 id=&quot;重拾C&quot;&gt;&lt;a href=&quot;#重拾C&quot; class=&quot;headerlink&quot; title=&quot;重拾C++&quot;&gt;&lt;/a&gt;重拾C++&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;看书&lt;/li&gt;
-&lt;li&gt;业务可选c++开发&lt;/li&gt;
-&lt;li&gt;github开源项目&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;h4 id=&quot;python&quot;&gt;&lt;a href=&quot;#python&quot; class=&quot;headerlink&quot; title=&quot;python&quot;&gt;&lt;/a&gt;python&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;工作使用的基础上写一些小工具&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;h4 id=&quot;lua&quot;&gt;&lt;a href=&quot;#lua&quot; class=&quot;headerlink&quot; title=&quot;lua&quot;&gt;&lt;/a&gt;lua&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;研究开源cocos2d的代码学习使用cocos2d-lua&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;h4 id=&quot;swift&quot;&gt;&lt;a href=&quot;#swift&quot; class=&quot;headerlink&quot; title=&quot;swift&quot;&gt;&lt;/a&gt;swift&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;看开源小项目结合cocos等开发小的ios应用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;h4 id=&quot;充分了解微博广告部门业务和架构&quot;&gt;&lt;a href=&quot;#充分了解微博广告部门业务和架构&quot; class=&quot;headerlink&quot; title=&quot;充分了解微博广告部门业务和架构&quot;&gt;&lt;/a&gt;充分了解微博广告部门业务和架构&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;工作期间积累&lt;/li&gt;
-&lt;li&gt;精通自己的业务&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;关于诗和远方&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;半年前我被元旦假期后1.4号的&lt;del&gt;股灾&lt;/del&gt;击败了.&lt;/p&gt;
-&lt;p&gt;健身计划被打乱,学习计划被打乱.&lt;/p&gt;
-&lt;p&gt;现在是时候卷土重来了&lt;/p&gt;
-&lt;p&gt;一年,我要发奋图强一年.&lt;/
-    
-    </summary>
-    
-    
-      <category term="Future" scheme="http://yoursite.com/tags/Future/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>MD</title>
-    <link href="http://yoursite.com/2016/05/10/MD/"/>
-    <id>http://yoursite.com/2016/05/10/MD/</id>
-    <published>2016-05-10T11:28:31.000Z</published>
-    <updated>2016-08-10T16:43:24.000Z</updated>
+    <link href="http://yoursite.com/2016/08/10/MD/"/>
+    <id>http://yoursite.com/2016/08/10/MD/</id>
+    <published>2016-08-10T15:28:31.000Z</published>
+    <updated>2016-08-11T07:30:34.000Z</updated>
     
     <content type="html">&lt;p&gt;念个经&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/night_city.png&quot; alt=&quot;yeyeyeye&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;code&lt;/code&gt;&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#include&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;gg&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;hehe&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;kbd&gt;&lt;kbd&gt;wobuxinbuxin&lt;/kbd&gt;&lt;/kbd&gt;&lt;/p&gt;
-&lt;p&gt;&lt;del&gt;wobuxinbuxin&lt;/del&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;hhe wo&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;asd&lt;/li&gt;
-&lt;li&gt;asd&lt;/li&gt;
-&lt;li&gt;asd&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;!@&quot;&gt;&lt;/a&gt;!@&lt;/h1&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;meta-string&quot;&gt;&amp;lt;stdio&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; argc, &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; *argv[])&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;/* code */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  return &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
-int main(){
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;万亿大神&quot;&gt;&lt;a href=&quot;#万亿大神&quot; class=&quot;headerlink&quot; title=&quot;万亿大神!&quot;&gt;&lt;/a&gt;万亿大神!&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;www.baidu.com&quot; title=&quot;wanyidashen&quot;&gt;万一大神&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;  &lt;kbd&gt;&lt;kbd&gt;大傻逼!!&lt;/kbd&gt;&lt;/kbd&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;我阿萨德&lt;/p&gt;
-&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
     
       &lt;p&gt;念个经&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/night_city.png&quot; alt=&quot;yeyeyeye&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;code&lt;/code&gt;&lt;br&gt;&lt;figure class=&quot;highligh
-    
-    </summary>
-    
-    
-      <category term="HIIII.." scheme="http://yoursite.com/tags/HIIII/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>My New Post</title>
-    <link href="http://yoursite.com/2016/05/10/My-New-Post/"/>
-    <id>http://yoursite.com/2016/05/10/My-New-Post/</id>
-    <published>2016-05-09T16:30:39.000Z</published>
-    <updated>2016-05-09T16:31:09.000Z</updated>
-    
-    <content type="html">&lt;p&gt;Have a TTTTTTry.&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Have a TTTTTTry.&lt;/p&gt;
 
     
     </summary>
     
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   

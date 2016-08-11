@@ -312,8 +312,10 @@
 <p>常量左值引用是只读的!!!!</p>
 <p>目的是为了减少各种开销,内存,复制,拷贝构造,析构等.</p>
 <hr>
-<h1 id="绕口令TIPS"><a href="#绕口令TIPS" class="headerlink" title="绕口令TIPS"></a>绕口令TIPS</h1><p>左值引用不可以绑定右值,下面是错误的<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; d = c;</span><br></pre></td></tr></table></figure></p>
+<h1 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h1><p>左值引用不可以绑定右值,下面是错误的<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; d = c;</span><br></pre></td></tr></table></figure></p>
 <p>非常量左值只能接受非常量左值对其进行初始化。</p>
+<p>标准库在 <code>&lt;type_traits&gt;</code> <code>头文件中提供了3个模板类：is_rvalue_reference</code>,<code>is_lvalue_reference</code>,<code>is_reference</code>,可供我们进行判断。比如:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; is_rvalue_reference&lt;<span class="built_in">string</span> &amp;&amp;&gt;::value;</span><br></pre></td></tr></table></figure>
 <hr>
 
           
@@ -364,237 +366,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/11/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-11T00:21:04+08:00" content="2016-08-11">
-              2016-08-11
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/12/plan/" itemprop="url">
-                  plan
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-12T12:27:19+08:00" content="2016-05-12">
-              2016-05-12
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>关于诗和远方</p>
-</blockquote>
-<p>半年前我被元旦假期后1.4号的<del>股灾</del>击败了.</p>
-<p>健身计划被打乱,学习计划被打乱.</p>
-<p>现在是时候卷土重来了</p>
-<p>一年,我要发奋图强一年.</p>
-<p>暂列点计划和想法,以后想到再来更新</p>
-<p><img src="http://o6ymgz5vj.bkt.clouddn.com/plan.png" alt="mood"></p>
-<ul>
-<li><h4 id="重拾C"><a href="#重拾C" class="headerlink" title="重拾C++"></a>重拾C++</h4><ul>
-<li>看书</li>
-<li>业务可选c++开发</li>
-<li>github开源项目</li>
-</ul>
-</li>
-<li><h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><ul>
-<li>工作使用的基础上写一些小工具</li>
-</ul>
-</li>
-<li><h4 id="lua"><a href="#lua" class="headerlink" title="lua"></a>lua</h4><ul>
-<li>研究开源cocos2d的代码学习使用cocos2d-lua</li>
-</ul>
-</li>
-<li><h4 id="swift"><a href="#swift" class="headerlink" title="swift"></a>swift</h4><ul>
-<li>看开源小项目结合cocos等开发小的ios应用</li>
-</ul>
-</li>
-<li><h4 id="充分了解微博广告部门业务和架构"><a href="#充分了解微博广告部门业务和架构" class="headerlink" title="充分了解微博广告部门业务和架构"></a>充分了解微博广告部门业务和架构</h4><ul>
-<li>工作期间积累</li>
-<li>精通自己的业务</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/10/MD/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/10/MD/" itemprop="url">
                   MD
                 </a>
               
@@ -608,8 +380,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-10T19:28:31+08:00" content="2016-05-10">
-              2016-05-10
+            <time itemprop="dateCreated" datetime="2016-08-10T23:28:31+08:00" content="2016-08-10">
+              2016-08-10
             </time>
           </span>
 
@@ -640,123 +412,6 @@
           
             <p>念个经</p>
 <p><img src="http://o6ymgz5vj.bkt.clouddn.com/night_city.png" alt="yeyeyeye"></p>
-<p><code>code</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include</span><br></pre></td></tr></table></figure></p>
-<p><strong>gg</strong></p>
-<p><em>hehe</em></p>
-<p><kbd><kbd>wobuxinbuxin</kbd></kbd></p>
-<p><del>wobuxinbuxin</del></p>
-<blockquote>
-<p>hhe wo</p>
-</blockquote>
-<ol>
-<li>asd</li>
-<li>asd</li>
-<li>asd</li>
-</ol>
-<h1 id=""><a href="#" class="headerlink" title="!@"></a>!@</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line">  return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>#include &lt;iostream&gt;
-int main(){
-
-}
-</code></pre><h3 id="万亿大神"><a href="#万亿大神" class="headerlink" title="万亿大神!"></a>万亿大神!</h3><p><a href="www.baidu.com" title="wanyidashen">万一大神</a></p>
-<p>  <kbd><kbd>大傻逼!!</kbd></kbd></p>
-<blockquote>
-<p>我阿萨德</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/10/My-New-Post/" itemprop="url">
-                  My New Post
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-10T00:30:39+08:00" content="2016-05-10">
-              2016-05-10
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Have a TTTTTTry.</p>
 
           
         
@@ -826,7 +481,7 @@ int main(){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

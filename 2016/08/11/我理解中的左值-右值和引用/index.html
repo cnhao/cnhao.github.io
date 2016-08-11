@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -110,7 +110,7 @@
 
 左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。
 无论是左值引用还是右值引用">
-<meta property="og:updated_time" content="2016-08-11T07:15:07.000Z">
+<meta property="og:updated_time" content="2016-08-11T07:27:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我理解中的左值,右值和引用">
 <meta name="twitter:description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.
@@ -333,8 +333,10 @@
 <p>常量左值引用是只读的!!!!</p>
 <p>目的是为了减少各种开销,内存,复制,拷贝构造,析构等.</p>
 <hr>
-<h1 id="绕口令TIPS"><a href="#绕口令TIPS" class="headerlink" title="绕口令TIPS"></a>绕口令TIPS</h1><p>左值引用不可以绑定右值,下面是错误的<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; d = c;</span><br></pre></td></tr></table></figure></p>
+<h1 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h1><p>左值引用不可以绑定右值,下面是错误的<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; d = c;</span><br></pre></td></tr></table></figure></p>
 <p>非常量左值只能接受非常量左值对其进行初始化。</p>
+<p>标准库在 <code>&lt;type_traits&gt;</code> <code>头文件中提供了3个模板类：is_rvalue_reference</code>,<code>is_lvalue_reference</code>,<code>is_reference</code>,可供我们进行判断。比如:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; is_rvalue_reference&lt;<span class="built_in">string</span> &amp;&amp;&gt;::value;</span><br></pre></td></tr></table></figure>
 <hr>
 
       
@@ -355,13 +357,19 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/08/10/MD/" rel="next" title="MD">
+                <i class="fa fa-chevron-left"></i> MD
               </a>
             
           </div>
@@ -434,7 +442,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -509,7 +517,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#右值引用"><span class="nav-number">2.</span> <span class="nav-text">右值引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#万能引用-常量左值引用"><span class="nav-number">3.</span> <span class="nav-text">万能引用(常量左值引用)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绕口令TIPS"><span class="nav-number">4.</span> <span class="nav-text">绕口令TIPS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#右值引用"><span class="nav-number">2.</span> <span class="nav-text">右值引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#万能引用-常量左值引用"><span class="nav-number">3.</span> <span class="nav-text">万能引用(常量左值引用)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TIPS"><span class="nav-number">4.</span> <span class="nav-text">TIPS</span></a></li></ol></div>
             
           </div>
         </section>
