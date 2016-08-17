@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-17T06:38:43.000Z</updated>
+  <updated>2016-08-17T07:43:09.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,64 +20,100 @@
     <link href="http://yoursite.com/2016/08/17/bitmap/"/>
     <id>http://yoursite.com/2016/08/17/bitmap/</id>
     <published>2016-08-17T06:03:16.000Z</published>
-    <updated>2016-08-17T06:38:43.000Z</updated>
+    <updated>2016-08-17T07:43:09.000Z</updated>
     
     <content type="html">&lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
 &lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;/p&gt;
 &lt;p&gt;当一个基本定向的广告(&lt;strong&gt;上下线&lt;/strong&gt;,&lt;strong&gt;修改&lt;/strong&gt;等)由bp告知ws后,ws会转发给位图索引.&lt;/p&gt;
 &lt;p&gt;位图维护一个N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Age位图:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;ABCD&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;EFGH&lt;/th&gt;
-&lt;th style=&quot;text-align:right&quot;&gt;IJKL&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;adid_1&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;adid_2&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;…&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;adid_20&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;…&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;a&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;b&lt;/td&gt;
-&lt;td style=&quot;text-align:right&quot;&gt;c&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;20&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;d&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;e&lt;/td&gt;
-&lt;td style=&quot;text-align:right&quot;&gt;f&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;21&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;g&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;h&lt;/td&gt;
-&lt;td style=&quot;text-align:right&quot;&gt;i&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;22&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;20&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;21&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;…&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;43&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;ABCD&lt;/th&gt;
-&lt;th&gt;EFGH&lt;/th&gt;
-&lt;th&gt;IGKL&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;a&lt;/td&gt;
-&lt;td&gt;b&lt;/td&gt;
-&lt;td&gt;c&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;d&lt;/td&gt;
-&lt;td&gt;e&lt;/td&gt;
-&lt;td&gt;f&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;g&lt;/td&gt;
-&lt;td&gt;h&lt;/td&gt;
-&lt;td&gt;i&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;类似的兴趣位图,位置位图都是类似的结构.&lt;/p&gt;
+&lt;p&gt;左边第一列就是这个维度的所有枚举值,这一行剩下的每一个位置都代表了某广告计划是否选择了这个维度的这个枚举值进行投放.&lt;/p&gt;
+&lt;p&gt;譬如一个广告计划是对北京,20-25岁,女性进行投放,那么就分别对这三个特征维度的位图更新&lt;/p&gt;
+&lt;p&gt;当一个广告请求从端上传到MS以后,因为请求中带着用户uid,&lt;strong&gt;MS会先从redis中取到这个uid的特征&lt;/strong&gt;,如果用户年龄是22岁,那么在age位图中全第一列为25的行中所有值为1的广告计划 &lt;strong&gt;(可以用1去做与操作,或者用0做异或,对位图的可以用左移,右移,加减1,与或非和模运算来实现)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;然后在location位图中取位置为北京的那一行,同样的在女性中取所有adid,在别的维度取的值为空,然后对取出的三列adid求交集,done!&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;之后还会有一些别的业务逻辑的规则应用,譬如微博有一种广告产品(也是最贵的广告产品),就是定投,广告主自己通过自己或者第三方挖包,自己制定一个uid包,这个业务会在redis里维护一个&lt;code&gt;uid---&amp;gt;adid&lt;/code&gt;倒排索引.继续和上面的结果求交集.&lt;/p&gt;
+&lt;p&gt;最后把所有的广告候选集做排序,返回头部(投放概述图中有提到).&lt;/p&gt;
 </content>
     
     <summary type="html">
