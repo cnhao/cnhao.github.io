@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="广告引擎," />
 
 
 
@@ -86,15 +86,118 @@
 
 
 
-<meta name="description" content="走走停停，不忘初心😄">
-<meta property="og:type" content="website">
-<meta property="og:title" content="艾泽拉斯">
-<meta property="og:url" content="http://yoursite.com/tags/随笔/index.html">
+<meta name="description" content="说一下之前投放系统概述里说到过的位图索引–Bitmap索引.
+这一块应该也是业务逻辑为主要内容的工作中最有Trick的部分了.
+当一个基本定向的广告(上下线,修改等)由bp告知ws后,ws会转发给位图索引.
+位图维护一个N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)
+
+
+
+ABCD
+EFGH
+IJKL
+
+
+
+
+a
+b
+c
+
+
+d
+e
+f
+
+
+g
+h
+i
+
+
+
+
+
+
+ABCD
+EFGH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位图索引">
+<meta property="og:url" content="http://yoursite.com/2016/08/17/bitmap/index.html">
 <meta property="og:site_name" content="艾泽拉斯">
-<meta property="og:description" content="走走停停，不忘初心😄">
+<meta property="og:description" content="说一下之前投放系统概述里说到过的位图索引–Bitmap索引.
+这一块应该也是业务逻辑为主要内容的工作中最有Trick的部分了.
+当一个基本定向的广告(上下线,修改等)由bp告知ws后,ws会转发给位图索引.
+位图维护一个N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)
+
+
+
+ABCD
+EFGH
+IJKL
+
+
+
+
+a
+b
+c
+
+
+d
+e
+f
+
+
+g
+h
+i
+
+
+
+
+
+
+ABCD
+EFGH">
+<meta property="og:updated_time" content="2016-08-17T06:38:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="艾泽拉斯">
-<meta name="twitter:description" content="走走停停，不忘初心😄">
+<meta name="twitter:title" content="位图索引">
+<meta name="twitter:description" content="说一下之前投放系统概述里说到过的位图索引–Bitmap索引.
+这一块应该也是业务逻辑为主要内容的工作中最有Trick的部分了.
+当一个基本定向的广告(上下线,修改等)由bp告知ws后,ws会转发给位图索引.
+位图维护一个N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)
+
+
+
+ABCD
+EFGH
+IJKL
+
+
+
+
+a
+b
+c
+
+
+d
+e
+f
+
+
+g
+h
+i
+
+
+
+
+
+
+ABCD
+EFGH">
 
 
 
@@ -112,7 +215,7 @@
   };
 </script>
 
-  <title> 标签: 随笔 | 艾泽拉斯 </title>
+  <title> 位图索引 | 艾泽拉斯 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -133,7 +236,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -221,46 +324,176 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        随笔
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                位图索引
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-17T14:03:16+08:00" content="2016-08-17">
+              2016-08-17
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>说一下之前投放系统概述里说到过的位图索引–Bitmap索引.</p>
+<p>这一块应该也是业务逻辑为主要内容的工作中最有<strong><em>Trick</em></strong>的部分了.</p>
+<p>当一个基本定向的广告(<strong>上下线</strong>,<strong>修改</strong>等)由bp告知ws后,ws会转发给位图索引.</p>
+<p>位图维护一个N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)</p>
+<table>
+<thead>
+<tr>
+<th>ABCD</th>
+<th style="text-align:center">EFGH</th>
+<th style="text-align:right">IJKL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td style="text-align:center">b</td>
+<td style="text-align:right">c</td>
+</tr>
+<tr>
+<td>d</td>
+<td style="text-align:center">e</td>
+<td style="text-align:right">f</td>
+</tr>
+<tr>
+<td>g</td>
+<td style="text-align:center">h</td>
+<td style="text-align:right">i</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ABCD</th>
+<th>EFGH</th>
+<th>IGKL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+</tr>
+<tr>
+<td>d</td>
+<td>e</td>
+<td>f</td>
+</tr>
+<tr>
+<td>g</td>
+<td>h</td>
+<td>i</td>
+</tr>
+</tbody>
+</table>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/08/10/MD/" itemprop="url">
-              
-                <span itemprop="name">MD</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-10T23:28:31+08:00"
-              content="2016-08-10" >
-          08-10
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/广告引擎/" rel="tag">#广告引擎</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/17/微博广告投放系统概览/" rel="next" title="微博广告投放系统概览">
+                <i class="fa fa-chevron-left"></i> 微博广告投放系统概览
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -268,6 +501,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -287,8 +524,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/nice.jpg"
@@ -367,6 +613,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -470,6 +727,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

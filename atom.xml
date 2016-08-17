@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-17T02:38:05.000Z</updated>
+  <updated>2016-08-17T06:38:43.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>位图索引</title>
+    <link href="http://yoursite.com/2016/08/17/bitmap/"/>
+    <id>http://yoursite.com/2016/08/17/bitmap/</id>
+    <published>2016-08-17T06:03:16.000Z</published>
+    <updated>2016-08-17T06:38:43.000Z</updated>
+    
+    <content type="html">&lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
+&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;/p&gt;
+&lt;p&gt;当一个基本定向的广告(&lt;strong&gt;上下线&lt;/strong&gt;,&lt;strong&gt;修改&lt;/strong&gt;等)由bp告知ws后,ws会转发给位图索引.&lt;/p&gt;
+&lt;p&gt;位图维护一个N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ABCD&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;EFGH&lt;/th&gt;
+&lt;th style=&quot;text-align:right&quot;&gt;IJKL&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;a&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;b&lt;/td&gt;
+&lt;td style=&quot;text-align:right&quot;&gt;c&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;d&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;e&lt;/td&gt;
+&lt;td style=&quot;text-align:right&quot;&gt;f&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;g&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;h&lt;/td&gt;
+&lt;td style=&quot;text-align:right&quot;&gt;i&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ABCD&lt;/th&gt;
+&lt;th&gt;EFGH&lt;/th&gt;
+&lt;th&gt;IGKL&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;a&lt;/td&gt;
+&lt;td&gt;b&lt;/td&gt;
+&lt;td&gt;c&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;d&lt;/td&gt;
+&lt;td&gt;e&lt;/td&gt;
+&lt;td&gt;f&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;g&lt;/td&gt;
+&lt;td&gt;h&lt;/td&gt;
+&lt;td&gt;i&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
+&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;/p&gt;
+&lt;p&gt;当一个基本定向的广告(&lt;strong&gt;上下线&lt;/strong&gt;,&lt;
+    
+    </summary>
+    
+    
+      <category term="广告引擎" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8A%E5%BC%95%E6%93%8E/"/>
+    
+  </entry>
   
   <entry>
     <title>微博广告投放系统概览</title>
