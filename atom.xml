@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-17T07:43:09.000Z</updated>
+  <updated>2016-08-17T08:27:26.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/08/17/bitmap/"/>
     <id>http://yoursite.com/2016/08/17/bitmap/</id>
     <published>2016-08-17T06:03:16.000Z</published>
-    <updated>2016-08-17T07:43:09.000Z</updated>
+    <updated>2016-08-17T08:27:26.000Z</updated>
     
     <content type="html">&lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
 &lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;/p&gt;
@@ -114,6 +114,10 @@
 &lt;hr&gt;
 &lt;p&gt;之后还会有一些别的业务逻辑的规则应用,譬如微博有一种广告产品(也是最贵的广告产品),就是定投,广告主自己通过自己或者第三方挖包,自己制定一个uid包,这个业务会在redis里维护一个&lt;code&gt;uid---&amp;gt;adid&lt;/code&gt;倒排索引.继续和上面的结果求交集.&lt;/p&gt;
 &lt;p&gt;最后把所有的广告候选集做排序,返回头部(投放概述图中有提到).&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;感谢强大的C++,感谢内存操作,感谢MTV,CCTV&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;基本定向从位图索引中拉取,求交只需 1ms!!&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
