@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-17T08:39:13.000Z</updated>
+  <updated>2016-08-31T09:37:52.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,16 +16,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Mac下brew安装制定版本</title>
+    <link href="http://yoursite.com/2016/08/31/homebrew/"/>
+    <id>http://yoursite.com/2016/08/31/homebrew/</id>
+    <published>2016-08-31T09:35:03.000Z</published>
+    <updated>2016-08-31T09:37:52.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="Macosx" scheme="http://yoursite.com/tags/Macosx/"/>
+    
+  </entry>
+  
+  <entry>
     <title>位图索引</title>
     <link href="http://yoursite.com/2016/08/17/bitmap/"/>
     <id>http://yoursite.com/2016/08/17/bitmap/</id>
     <published>2016-08-17T06:03:16.000Z</published>
-    <updated>2016-08-17T08:39:13.000Z</updated>
+    <updated>2016-08-17T08:40:15.000Z</updated>
     
     <content type="html">&lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
 &lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;/p&gt;
 &lt;p&gt;当一个基本定向的广告(&lt;strong&gt;上下线&lt;/strong&gt;,&lt;strong&gt;修改&lt;/strong&gt;等)由bp告知ws后,ws会转发给位图索引.&lt;/p&gt;
-&lt;p&gt;位图维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)&lt;/p&gt;
+&lt;p&gt;位图索引维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;Age位图:&lt;/p&gt;
 &lt;table&gt;
