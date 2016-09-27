@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-31T09:46:45.000Z</updated>
+  <updated>2016-09-27T06:25:40.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算机中字,字长,字节与位</title>
+    <link href="http://yoursite.com/2016/09/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E5%AD%97-%E5%AD%97%E9%95%BF-%E5%AD%97%E8%8A%82%E4%B8%8E%E4%BD%8D/"/>
+    <id>http://yoursite.com/2016/09/27/计算机中字-字长-字节与位/</id>
+    <published>2016-09-27T06:12:42.000Z</published>
+    <updated>2016-09-27T06:25:40.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;gt-抛开机器谈字长-都是耍流氓&quot;&gt;&lt;a href=&quot;#gt-抛开机器谈字长-都是耍流氓&quot; class=&quot;headerlink&quot; title=&quot;&amp;gt; 抛开机器谈字长,都是耍流氓&quot;&gt;&lt;/a&gt;&amp;gt; 抛开机器谈字长,都是耍流氓&lt;/h2&gt;&lt;h4 id=&quot;比特-位-bit&quot;&gt;&lt;a href=&quot;#比特-位-bit&quot; class=&quot;headerlink&quot; title=&quot;比特==位==bit&quot;&gt;&lt;/a&gt;比特==位==bit&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;计算机存储的最小单位&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;bit就是一个二进制位.&lt;/p&gt;
+&lt;h4 id=&quot;字节-拜特-Byte&quot;&gt;&lt;a href=&quot;#字节-拜特-Byte&quot; class=&quot;headerlink&quot; title=&quot;字节==拜特==Byte&quot;&gt;&lt;/a&gt;字节==拜特==Byte&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;计算机中以字节为单位存储和解释信息&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1Byte == 8bit &lt;del&gt;我在8bit后面加不加s的问题上犹豫了五分钟🙄&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;一个字节可以存储一个ASCII码的内容&lt;/p&gt;
+&lt;h4 id=&quot;字-word&quot;&gt;&lt;a href=&quot;#字-word&quot; class=&quot;headerlink&quot; title=&quot;字==word&quot;&gt;&lt;/a&gt;字==word&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;计算机进行数据处理时,一次存取、加工和传送的数据长度称为字(word)。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一个64位处理器顾名思义一次可以处理64个位,8个字节的数据,所以一个字长就是8&lt;/p&gt;
+&lt;p&gt;32位一个word就是4&lt;/p&gt;
+&lt;p&gt;c++里一个指针就占用一个机器字长的长度.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;gt-抛开机器谈字长-都是耍流氓&quot;&gt;&lt;a href=&quot;#gt-抛开机器谈字长-都是耍流氓&quot; class=&quot;headerlink&quot; title=&quot;&amp;gt; 抛开机器谈字长,都是耍流氓&quot;&gt;&lt;/a&gt;&amp;gt; 抛开机器谈字长,都是耍流氓&lt;/h2&gt;&lt;h4 id=&quot;比特-位-
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Mac下brew安装制定版本</title>
