@@ -584,120 +584,12 @@
 <p>当一个广告请求从端上传到MS以后,因为请求中带着用户uid,<strong>MS会先从redis中取到这个uid的特征</strong>,如果用户年龄是22岁,那么在age位图中第一列为22的行中所有值为1的广告计划 <strong>(可以用1去做与操作,或者用0做异或,对位图的可以用左移,右移,加减1,与或非和模运算来实现)</strong></p>
 <p>然后在location位图中取位置为北京的那一行,同样的在女性中取所有adid,在别的维度取的值为空,然后对取出的三列adid求交集,done!</p>
 <hr>
-<p>之后还会有一些别的业务逻辑的规则应用,譬如微博有一种广告产品(也是最贵的广告产品),就是定投,广告主通过自己或者第三方挖包,制定一个uid包上传给广告引擎,我们会在redis里维护一个<code>uid---&gt;adid</code>倒排索引.继续和上面的结果求交集.</p>
+<p>之后还会有一些别的业务逻辑的规则应用,譬如**有一种广告产品(也是最贵的广告产品),就是定投,广告主通过自己或者第三方挖包,制定一个uid包上传给广告引擎,我们会在redis里维护一个<code>uid---&gt;adid</code>倒排索引.继续和上面的结果求交集.</p>
 <p>最后把所有的广告候选集做排序,返回头部(投放概述图中有提到).</p>
 <hr>
 <blockquote>
 <p><strong>感谢强大的C++,感谢内存操作,感谢MTV,CCTV</strong><br><strong>基本定向从位图索引中拉取,求交只需 1ms!!</strong></p>
 </blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/17/微博广告投放系统概览/" itemprop="url">
-                  微博广告投放系统概览
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-17T10:30:32+08:00" content="2016-08-17">
-              2016-08-17
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>微博广告系统分两大块主要的内容</p>
-<ol>
-<li>投放</li>
-<li>结算</li>
-</ol>
-<hr>
-<p>这里说的广告主要指的是feed流里面的广告.</p>
-<p>这个文章里的图代表是微博收入最大的一块,粉丝通投放流程.</p>
-<p>粉丝通广告中还有一些特殊广告会有细微差别.</p>
-<p>譬如应用家,品牌速递,账号推广,原生广告等.</p>
-<p>以后想到什么了就说点.</p>
-<p><img src="http://o6ymgz5vj.bkt.clouddn.com/toufang.png" alt="干货"></p>
-<hr>
-<p><strong>我画这图好像都是纯干货,我就不废话了,以后再啰嗦</strong></p>
-<p><strong>MS—&gt;Match Server</strong></p>
 
           
         
@@ -983,7 +875,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
