@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-20T09:39:10.000Z</updated>
+  <updated>2017-03-20T14:20:34.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>所以为什么要用齐次坐标呢?</title>
+    <link href="http://yoursite.com/2017/03/20/4d/"/>
+    <id>http://yoursite.com/2017/03/20/4d/</id>
+    <published>2017-03-20T13:52:52.000Z</published>
+    <updated>2017-03-20T14:20:34.000Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;出于某种原因,我们在这里使用四维矩阵&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;也就是说为啥不这样搞,如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/axb.png&quot; alt=&quot;ax=b&quot;&gt;&lt;/p&gt;
+&lt;p&gt;最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.&lt;/p&gt;
+&lt;p&gt;首先现代的图形sdk都是可编程管线的,你是怎么变化的是自己写进shader里面的.&lt;/p&gt;
+&lt;p&gt;说法有很多,我大概回忆下各种说法.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;矩阵描述的是运动,这里的四维矩阵不是用来描述三维空间坐标和向量的,是描述运动的.&lt;/li&gt;
+&lt;li&gt;是仿射空间不是三维空间&lt;/li&gt;
+&lt;li&gt;如果变换矩阵使用三维的,就无法描述带有平移的运动.&lt;/li&gt;
+&lt;li&gt;同上,如果要用三维矩阵描述平移,需要ax后面加个b,ax+b&lt;/li&gt;
+&lt;li&gt;如果用三维矩阵表示三维空间的运动,那说到底都是在以原点为中心绕圈圈啊,我感觉这个说法对于我这样的菜鸟最好理解ax+by+c=0与ax+by+c+d=0的区别啊.一目了然.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;都对好吧,没毛病,老铁.&lt;/p&gt;
+&lt;p&gt;完备知识体系之神&lt;strong&gt;Milo Yip&lt;/strong&gt;认为:&lt;del&gt;是的是的,这个称号是我封的&lt;/del&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;fang’she仿射空间确实可以通过ax+b来实现,但是对于透视投影会用到齐次坐标.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这些话我都是用自己的话又翻译的..这样方便一点.我是这么理解他的话的,所以的透视投影对于变换矩阵的要求简单来讲就是需要平移和缩放,就像一个更大或者更小的相似三角形.&lt;/p&gt;
+&lt;p&gt;归纳一下:&lt;br&gt;如果用四维矩阵,也就是三维空间的齐次坐标来表示变化.就可以让缩放,平移,旋转,透视等变换在一个矩阵里实现(&lt;strong&gt;矩阵乘法结合律&lt;/strong&gt;).&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;WVP = Projection * View * Translation * Rotation * Scale&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;openGL的方式,从右往左,向量在最右边.然后ax得到结果.在三维空间中,描述一个点的话w分量一般约定为1,描述一个向量的一般约定为0.1-1=0.没毛病吧.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;出于某种原因,我们在这里使用四维矩阵&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;也就是说为啥不这样搞,如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/axb.png&quot; alt=&quot;ax=b&quot;
+    
+    </summary>
+    
+    
+      <category term="图形学" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>Relax</title>
