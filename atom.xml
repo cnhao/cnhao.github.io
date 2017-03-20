@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-20T14:23:58.000Z</updated>
+  <updated>2017-03-20T14:36:18.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://yoursite.com/2017/03/20/4d/"/>
     <id>http://yoursite.com/2017/03/20/4d/</id>
     <published>2017-03-20T13:52:52.000Z</published>
-    <updated>2017-03-20T14:23:58.000Z</updated>
+    <updated>2017-03-20T14:36:18.000Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;出于某种原因,我们在这里使用四维矩阵&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.&lt;/p&gt;
 &lt;p&gt;也就是说为啥不这样搞,如下图&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/axb.png&quot; alt=&quot;ax=b&quot;&gt;&lt;/p&gt;
-&lt;p&gt;最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.&lt;/p&gt;
 &lt;p&gt;首先现代的图形sdk都是可编程管线的,你是怎么变化的是自己写进shader里面的.&lt;/p&gt;
 &lt;p&gt;说法有很多,我大概回忆下各种说法.&lt;/p&gt;
 &lt;ol&gt;
@@ -52,8 +52,8 @@
       &lt;blockquote&gt;
 &lt;p&gt;出于某种原因,我们在这里使用四维矩阵&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;也就是说为啥不这样搞,如下图&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/axb.png&quot; alt=&quot;ax=b&quot;
+&lt;p&gt;最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.&lt;/p&gt;
+&lt;p&gt;也就是说为啥不
     
     </summary>
     
