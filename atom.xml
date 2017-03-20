@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-20T14:40:32.000Z</updated>
+  <updated>2017-03-20T14:41:11.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/03/20/4d/"/>
     <id>http://yoursite.com/2017/03/20/4d/</id>
     <published>2017-03-20T13:52:52.000Z</published>
-    <updated>2017-03-20T14:40:32.000Z</updated>
+    <updated>2017-03-20T14:41:11.000Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;出于某种原因,我们在这里使用四维矩阵&lt;/p&gt;
@@ -40,7 +40,7 @@
 &lt;p&gt;都对好吧,没毛病,老铁.&lt;/p&gt;
 &lt;p&gt;完备知识体系之神&lt;strong&gt;Milo Yip&lt;/strong&gt;认为:&lt;del&gt;是的是的,这个称号是我封的&lt;/del&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;仿射仿射空间确实可以通过ax+b来实现,但是对于透视投影会用到齐次坐标.&lt;/p&gt;
+&lt;p&gt;仿射空间确实可以通过ax+b来实现,但是对于透视投影会用到齐次坐标.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;这些话我都是用自己的话又翻译的..这样方便一点.我是这么理解他的话的,所谓的透视投影对于变换矩阵的要求简单来讲就是需要平移和缩放,就像一个更大或者更小的相似三角形.&lt;/p&gt;
 &lt;p&gt;归纳一下:&lt;br&gt;如果用四维矩阵,也就是三维空间的齐次坐标来表示变化.就可以让缩放,平移,旋转,透视等变换在一个矩阵里实现(&lt;strong&gt;矩阵乘法结合律&lt;/strong&gt;).&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;WVP = Projection * View * Translation * Rotation * Scale&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
