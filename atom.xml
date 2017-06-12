@@ -4,9 +4,9 @@
   <subtitle>一个劣人的日常</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://cnhao.com/"/>
   <updated>2017-06-12T02:25:19.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://cnhao.com/</id>
   
   <author>
     <name>Cnhao</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>renew</title>
-    <link href="http://yoursite.com/2017/06/12/renew/"/>
-    <id>http://yoursite.com/2017/06/12/renew/</id>
+    <link href="http://cnhao.com/2017/06/12/renew/"/>
+    <id>http://cnhao.com/2017/06/12/renew/</id>
     <published>2017-06-12T02:24:26.000Z</published>
     <updated>2017-06-12T02:25:19.000Z</updated>
     
@@ -33,14 +33,14 @@
     </summary>
     
     
-      <category term="fix" scheme="http://yoursite.com/tags/fix/"/>
+      <category term="fix" scheme="http://cnhao.com/tags/fix/"/>
     
   </entry>
   
   <entry>
     <title>所以为什么要用齐次坐标呢?</title>
-    <link href="http://yoursite.com/2017/03/20/4d/"/>
-    <id>http://yoursite.com/2017/03/20/4d/</id>
+    <link href="http://cnhao.com/2017/03/20/4d/"/>
+    <id>http://cnhao.com/2017/03/20/4d/</id>
     <published>2017-03-20T13:52:52.000Z</published>
     <updated>2017-03-20T14:41:11.000Z</updated>
     
@@ -80,14 +80,14 @@
     </summary>
     
     
-      <category term="图形学" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+      <category term="图形学" scheme="http://cnhao.com/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>Relax</title>
-    <link href="http://yoursite.com/2017/03/20/bus/"/>
-    <id>http://yoursite.com/2017/03/20/bus/</id>
+    <link href="http://cnhao.com/2017/03/20/bus/"/>
+    <id>http://cnhao.com/2017/03/20/bus/</id>
     <published>2017-03-20T08:58:23.000Z</published>
     <updated>2017-03-20T09:39:10.000Z</updated>
     
@@ -126,14 +126,14 @@
     </summary>
     
     
-      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://cnhao.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
   <entry>
     <title>计算机中字,字长,字节与位</title>
-    <link href="http://yoursite.com/2016/09/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E5%AD%97-%E5%AD%97%E9%95%BF-%E5%AD%97%E8%8A%82%E4%B8%8E%E4%BD%8D/"/>
-    <id>http://yoursite.com/2016/09/27/计算机中字-字长-字节与位/</id>
+    <link href="http://cnhao.com/2016/09/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E5%AD%97-%E5%AD%97%E9%95%BF-%E5%AD%97%E8%8A%82%E4%B8%8E%E4%BD%8D/"/>
+    <id>http://cnhao.com/2016/09/27/计算机中字-字长-字节与位/</id>
     <published>2016-09-27T06:12:42.000Z</published>
     <updated>2016-09-27T06:33:54.000Z</updated>
     
@@ -171,14 +171,14 @@
     </summary>
     
     
-      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="http://cnhao.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>Mac下brew安装制定版本</title>
-    <link href="http://yoursite.com/2016/08/31/homebrew/"/>
-    <id>http://yoursite.com/2016/08/31/homebrew/</id>
+    <link href="http://cnhao.com/2016/08/31/homebrew/"/>
+    <id>http://cnhao.com/2016/08/31/homebrew/</id>
     <published>2016-08-31T09:35:03.000Z</published>
     <updated>2016-08-31T09:46:45.000Z</updated>
     
@@ -201,14 +201,14 @@
     </summary>
     
     
-      <category term="Macosx" scheme="http://yoursite.com/tags/Macosx/"/>
+      <category term="Macosx" scheme="http://cnhao.com/tags/Macosx/"/>
     
   </entry>
   
   <entry>
     <title>位图索引</title>
-    <link href="http://yoursite.com/2016/08/17/bitmap/"/>
-    <id>http://yoursite.com/2016/08/17/bitmap/</id>
+    <link href="http://cnhao.com/2016/08/17/bitmap/"/>
+    <id>http://cnhao.com/2016/08/17/bitmap/</id>
     <published>2016-08-17T06:03:16.000Z</published>
     <updated>2016-09-27T06:27:16.000Z</updated>
     
@@ -319,14 +319,14 @@
     </summary>
     
     
-      <category term="广告引擎" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8A%E5%BC%95%E6%93%8E/"/>
+      <category term="广告引擎" scheme="http://cnhao.com/tags/%E5%B9%BF%E5%91%8A%E5%BC%95%E6%93%8E/"/>
     
   </entry>
   
   <entry>
     <title>广告投放系统概览</title>
-    <link href="http://yoursite.com/2016/08/17/%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%A7%88/"/>
-    <id>http://yoursite.com/2016/08/17/广告投放系统概览/</id>
+    <link href="http://cnhao.com/2016/08/17/%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%A7%88/"/>
+    <id>http://cnhao.com/2016/08/17/广告投放系统概览/</id>
     <published>2016-08-17T02:30:32.000Z</published>
     <updated>2016-09-27T06:38:35.000Z</updated>
     
@@ -362,14 +362,14 @@
     </summary>
     
     
-      <category term="广告引擎" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8A%E5%BC%95%E6%93%8E/"/>
+      <category term="广告引擎" scheme="http://cnhao.com/tags/%E5%B9%BF%E5%91%8A%E5%BC%95%E6%93%8E/"/>
     
   </entry>
   
   <entry>
     <title>我理解中的左值,右值和引用</title>
-    <link href="http://yoursite.com/2016/08/11/%E6%88%91%E7%90%86%E8%A7%A3%E4%B8%AD%E7%9A%84%E5%B7%A6%E5%80%BC-%E5%8F%B3%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/"/>
-    <id>http://yoursite.com/2016/08/11/我理解中的左值-右值和引用/</id>
+    <link href="http://cnhao.com/2016/08/11/%E6%88%91%E7%90%86%E8%A7%A3%E4%B8%AD%E7%9A%84%E5%B7%A6%E5%80%BC-%E5%8F%B3%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/"/>
+    <id>http://cnhao.com/2016/08/11/我理解中的左值-右值和引用/</id>
     <published>2016-08-11T05:40:28.000Z</published>
     <updated>2016-08-11T07:27:52.000Z</updated>
     
@@ -410,14 +410,14 @@
     </summary>
     
     
-      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+      <category term="C++" scheme="http://cnhao.com/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>MD</title>
-    <link href="http://yoursite.com/2016/08/10/MD/"/>
-    <id>http://yoursite.com/2016/08/10/MD/</id>
+    <link href="http://cnhao.com/2016/08/10/MD/"/>
+    <id>http://cnhao.com/2016/08/10/MD/</id>
     <published>2016-08-10T15:28:31.000Z</published>
     <updated>2016-08-11T07:30:34.000Z</updated>
     
@@ -434,7 +434,7 @@
     </summary>
     
     
-      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://cnhao.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
