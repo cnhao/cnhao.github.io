@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-20T14:41:11.000Z</updated>
+  <updated>2017-06-12T02:25:19.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>renew</title>
+    <link href="http://yoursite.com/2017/06/12/renew/"/>
+    <id>http://yoursite.com/2017/06/12/renew/</id>
+    <published>2017-06-12T02:24:26.000Z</published>
+    <updated>2017-06-12T02:25:19.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;em&gt;所以到底发生了什么事呢,真讨厌&lt;/em&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;所以到底发生了什么事呢,真讨厌&lt;/em&gt;&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+      <category term="fix" scheme="http://yoursite.com/tags/fix/"/>
+    
+  </entry>
   
   <entry>
     <title>所以为什么要用齐次坐标呢?</title>
