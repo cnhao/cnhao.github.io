@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnhao.com/"/>
-  <updated>2017-12-26T18:13:27.187Z</updated>
+  <updated>2017-12-26T18:43:38.673Z</updated>
   <id>http://cnhao.com/</id>
   
   <author>
@@ -20,26 +20,24 @@
     <link href="http://cnhao.com/2017/08/20/aligment/"/>
     <id>http://cnhao.com/2017/08/20/aligment/</id>
     <published>2017-08-20T13:52:52.000Z</published>
-    <updated>2017-12-26T18:13:27.187Z</updated>
+    <updated>2017-12-26T18:43:38.673Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;biaoti1&quot;&gt;&lt;a href=&quot;#biaoti1&quot; class=&quot;headerlink&quot; title=&quot;biaoti1&quot;&gt;&lt;/a&gt;biaoti1&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;cu&lt;/strong&gt;&lt;br&gt;&lt;em&gt;xie&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;item&lt;ul&gt;
-&lt;li&gt;itemasasd&lt;/li&gt;
-&lt;li&gt;asd&lt;/li&gt;
-&lt;li&gt;as&lt;/li&gt;
-&lt;li&gt;d&lt;/li&gt;
-&lt;li&gt;asd&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+    <content type="html">&lt;h1 id=&quot;biaoti1&quot;&gt;&lt;a href=&quot;#biaoti1&quot; class=&quot;headerlink&quot; title=&quot;biaoti1&quot;&gt;&lt;/a&gt;biaoti1&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;cu&lt;/strong&gt;&lt;br&gt;&lt;em&gt;xie&lt;/em&gt;&lt;br&gt;&lt;em&gt;xie&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;asdasd&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;asasd&lt;/code&gt;&lt;br&gt;&lt;kbd&gt;&lt;del&gt;asd&lt;/del&gt;&lt;/kbd&gt;&lt;/p&gt;
+&lt;p&gt;|asd|asd|asd|asd|asd|asd|&lt;br&gt;| heh|asd|&lt;/p&gt;
+&lt;p&gt;| sdf| 0      | 0      | 1      |&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;|asd|asd|&lt;/p&gt;
+&lt;p&gt;  sjjakjh&lt;br&gt;  sajjk&lt;br&gt;  sjjakjh&lt;br&gt;  ad&lt;br&gt;    asdad&lt;br&gt;    asdad&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;asd&lt;/li&gt;
 &lt;li&gt;asd&lt;/li&gt;
 &lt;li&gt;asd&lt;/li&gt;
 &lt;li&gt;asd&lt;ol&gt;
-&lt;li&gt;asd  &lt;/li&gt;
+&lt;li&gt;asd&lt;/li&gt;
 &lt;li&gt;asdad&lt;/li&gt;
 &lt;li&gt;as&lt;/li&gt;
 &lt;li&gt;d&lt;/li&gt;
@@ -56,14 +54,12 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;biaoti1&quot;&gt;&lt;a href=&quot;#biaoti1&quot; class=&quot;headerlink&quot; title=&quot;biaoti1&quot;&gt;&lt;/a&gt;biaoti1&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;cu&lt;/strong&gt;&lt;br&gt;&lt;em&gt;xie&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;i
+      &lt;h1 id=&quot;biaoti1&quot;&gt;&lt;a href=&quot;#biaoti1&quot; class=&quot;headerlink&quot; title=&quot;biaoti1&quot;&gt;&lt;/a&gt;biaoti1&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;cu&lt;/strong&gt;&lt;br&gt;&lt;em&gt;xie&lt;/em&gt;&lt;br&gt;&lt;em&gt;xie&lt;/em
     
     </summary>
     
     
-      <category term="c++" scheme="http://cnhao.com/tags/c/"/>
+      <category term="C++" scheme="http://cnhao.com/tags/C/"/>
     
   </entry>
   
