@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnhao.com/"/>
-  <updated>2017-03-20T14:41:11.000Z</updated>
+  <updated>2017-12-26T17:54:43.716Z</updated>
   <id>http://cnhao.com/</id>
   
   <author>
@@ -14,6 +14,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>struck内存对齐</title>
+    <link href="http://cnhao.com/2017/08/20/aligment/"/>
+    <id>http://cnhao.com/2017/08/20/aligment/</id>
+    <published>2017-08-20T13:52:52.000Z</published>
+    <updated>2017-12-26T17:54:43.716Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;asd&quot;&gt;&lt;a href=&quot;#asd&quot; class=&quot;headerlink&quot; title=&quot;asd&quot;&gt;&lt;/a&gt;asd&lt;/h1&gt;&lt;h1 id=&quot;nihao&quot;&gt;&lt;a href=&quot;#nihao&quot; class=&quot;headerlink&quot; title=&quot;nihao&quot;&gt;&lt;/a&gt;nihao&lt;/h1&gt;&lt;p&gt;wojiao&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;item&lt;ul&gt;
+&lt;li&gt;itemasasd&lt;/li&gt;
+&lt;li&gt;asd&lt;/li&gt;
+&lt;li&gt;as&lt;/li&gt;
+&lt;li&gt;d&lt;/li&gt;
+&lt;li&gt;asd&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;rong&quot;&gt;&lt;a href=&quot;#rong&quot; class=&quot;headerlink&quot; title=&quot;rong&quot;&gt;&lt;/a&gt;rong&lt;/h1&gt;&lt;h2 id=&quot;hao&quot;&gt;&lt;a href=&quot;#hao&quot; class=&quot;headerlink&quot; title=&quot;hao&quot;&gt;&lt;/a&gt;hao&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#asd&quot;&gt;asd&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#nihao&quot;&gt;nihao&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#rong&quot;&gt;rong&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#hao&quot;&gt;hao&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#asd&quot;&gt;asd&lt;/a&gt;&lt;pre&gt;&lt;code&gt;- [asdasd](#asdasd)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;meta-string&quot;&gt;&amp;lt;shit&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;asdasd&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;nihao zheshizyangdakdhlahds&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;asd&quot;&gt;&lt;a href=&quot;#asd&quot; class=&quot;headerlink&quot; title=&quot;asd&quot;&gt;&lt;/a&gt;asd&lt;/h1&gt;&lt;h1 id=&quot;nihao&quot;&gt;&lt;a href=&quot;#nihao&quot; class=&quot;headerlink&quot; title=&quot;nihao&quot;&gt;&lt;/a&gt;
+    
+    </summary>
+    
+    
+      <category term="c++" scheme="http://cnhao.com/tags/c/"/>
+    
+  </entry>
   
   <entry>
     <title>所以为什么要用齐次坐标呢?</title>
