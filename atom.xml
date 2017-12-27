@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnhao.com/"/>
-  <updated>2017-12-27T10:18:46.262Z</updated>
+  <updated>2017-12-27T10:19:44.126Z</updated>
   <id>http://cnhao.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://cnhao.com/2017/11/27/struct/"/>
     <id>http://cnhao.com/2017/11/27/struct/</id>
     <published>2017-11-27T05:12:29.000Z</published>
-    <updated>2017-12-27T10:18:46.262Z</updated>
+    <updated>2017-12-27T10:19:44.126Z</updated>
     
     <content type="html">&lt;p&gt;网上写的五花八门的快餐式教程和规则嵌套毫无灵魂.&lt;/p&gt;
 &lt;p&gt; 为什么要对齐?什么时候使用&lt;code&gt;#pragma pack&lt;/code&gt;?有什么工具可以检查?有什么例外?等等..&lt;/p&gt;
@@ -186,7 +186,7 @@
     </summary>
     
     
-      <category term="C++ 游戏开发" scheme="http://cnhao.com/tags/C-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="C++,游戏开发" scheme="http://cnhao.com/tags/C-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
