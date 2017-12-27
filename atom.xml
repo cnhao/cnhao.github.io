@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnhao.com/"/>
-  <updated>2017-12-27T11:51:12.492Z</updated>
+  <updated>2017-12-27T13:17:28.245Z</updated>
   <id>http://cnhao.com/</id>
   
   <author>
@@ -20,11 +20,13 @@
     <link href="http://cnhao.com/2017/12/27/vector/"/>
     <id>http://cnhao.com/2017/12/27/vector/</id>
     <published>2017-12-27T11:28:59.000Z</published>
-    <updated>2017-12-27T11:51:12.492Z</updated>
+    <updated>2017-12-27T13:17:28.245Z</updated>
     
     <content type="html">&lt;p&gt;比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReallocBuffer(&lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;::max(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*mBitCapacity,nextBitHead);)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;所以为什么系数是2呢.&lt;br&gt;很简单,跟着&lt;code&gt;std::vector&lt;/code&gt;学的.&lt;/p&gt;
-&lt;p&gt;我们看一下&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;&amp;gt; v;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;&amp;gt;::size_type tmp = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, j = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;10000000&lt;/span&gt;; i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        v.push_back(i);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (v.capacity() != tmp)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; j &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot; &quot;&lt;/span&gt; &amp;lt;&amp;lt; v.capacity() &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            tmp = v.capacity();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            j++;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;我们看一下&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;&amp;gt; v;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;&amp;gt;::size_type tmp = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, j = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;10000000&lt;/span&gt;; i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        v.push_back(i);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (v.capacity() != tmp)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; j &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot; &quot;&lt;/span&gt; &amp;lt;&amp;lt; v.capacity() &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            tmp = v.capacity();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            j++;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;output:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1 1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3 4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4 8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5 16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6 32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7 64&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8 128&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9 256&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10 512&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11 1024&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12 2048&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13 4096&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14 8192&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15 16384&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16 32768&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17 65536&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18 131072&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19 262144&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20 524288&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21 1048576&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22 2097152&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23 4194304&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24 8388608&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25 16777216&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;所以为什么是2,2好不好.😆&lt;br&gt;其实并不好.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -43,7 +45,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;
+      &lt;p&gt;比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReallocBuffer(&lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;::max(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*mBitCapacity,nextBitHead);)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;所以为什么系数是2呢.&lt;br&gt;很简单,跟着&lt;code&gt;std::vector&lt;/code&gt;学的.&lt;/p&gt;
+&lt;p&gt;我们看一下&lt;/p&gt;
     
     </summary>
     
@@ -57,9 +61,10 @@
     <link href="http://cnhao.com/2017/11/27/struct/"/>
     <id>http://cnhao.com/2017/11/27/struct/</id>
     <published>2017-11-27T05:12:29.000Z</published>
-    <updated>2017-12-27T11:17:01.874Z</updated>
+    <updated>2017-12-27T13:17:46.527Z</updated>
     
     <content type="html">&lt;p&gt;网上写的五花八门的快餐式教程和规则嵌套毫无灵魂.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt; 为什么要对齐?什么时候使用&lt;code&gt;#pragma pack&lt;/code&gt;?有什么工具可以检查?有什么例外?等等..&lt;/p&gt;
 &lt;p&gt;听听大师怎么说? &lt;del&gt;我就不复制粘贴了.&lt;/del&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -216,9 +221,6 @@
     <summary type="html">
     
       &lt;p&gt;网上写的五花八门的快餐式教程和规则嵌套毫无灵魂.&lt;/p&gt;
-&lt;p&gt; 为什么要对齐?什么时候使用&lt;code&gt;#pragma pack&lt;/code&gt;?有什么工具可以检查?有什么例外?等等..&lt;/p&gt;
-&lt;p&gt;听听大师怎么说? &lt;del&gt;我就不复制粘贴了.&lt;/del&gt;&lt;/p&gt;
-&lt;bl
     
     </summary>
     
@@ -234,13 +236,14 @@
     <link href="http://cnhao.com/2017/03/20/4d/"/>
     <id>http://cnhao.com/2017/03/20/4d/</id>
     <published>2017-03-20T13:52:52.000Z</published>
-    <updated>2017-12-26T19:10:57.668Z</updated>
+    <updated>2017-12-27T13:18:44.762Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;出于某种原因,我们在这里使用四维矩阵&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.&lt;/p&gt;
 &lt;p&gt;也就是说为啥不这样搞,如下图&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/axb.png&quot; alt=&quot;ax=b&quot;&gt;&lt;/p&gt;
 &lt;p&gt;首先现代的图形sdk都是可编程管线的,你是怎么变化的是自己写进shader里面的.&lt;/p&gt;
 &lt;p&gt;说法有很多,我大概回忆下各种说法.&lt;/p&gt;
@@ -267,7 +270,7 @@
 &lt;p&gt;出于某种原因,我们在这里使用四维矩阵&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.&lt;/p&gt;
-&lt;p&gt;也就是说为啥不
+&lt;p&gt;也就是说为啥不这样搞,如下图&lt;/p&gt;
     
     </summary>
     
@@ -281,11 +284,12 @@
     <link href="http://cnhao.com/2017/03/20/bus/"/>
     <id>http://cnhao.com/2017/03/20/bus/</id>
     <published>2017-03-20T08:58:23.000Z</published>
-    <updated>2017-12-27T11:51:53.739Z</updated>
+    <updated>2017-12-27T13:17:29.294Z</updated>
     
     <content type="html">&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/bus.png&quot; alt=&quot;bus&quot;&gt;&lt;/p&gt;
 &lt;p&gt;最近大脑处于异常疲惫状态 &lt;del&gt;整天从早被操到晚啊,我累的天呐撸😭&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;但是不得不说,我特么终于又开始使用我发达的大脑了,还真是有点小兴奋呢.曾几何时,我这小兄弟既会打游戏,又会考试的.高中时候用AK杀人几局下来都不用重新换子弹的,天天睡觉又是早恋的闭着眼考985啊.想当年..&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;好了好了,吹比结束.&lt;/p&gt;
 &lt;p&gt;自从上了大学,和一群狐朋狗友打游戏占据了生活很大一块的时间.后来读了研,现在上班以后,每天业务时间时间又占据了我生活的主体.想一想,大脑好久没被挑战了.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -314,7 +318,7 @@
     
       &lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/bus.png&quot; alt=&quot;bus&quot;&gt;&lt;/p&gt;
 &lt;p&gt;最近大脑处于异常疲惫状态 &lt;del&gt;整天从早被操到晚啊,我累的天呐撸😭&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;但是不得不说,我特么终于又开始使用
+&lt;p&gt;但是不得不说,我特么终于又开始使用我发达的大脑了,还真是有点小兴奋呢.曾几何时,我这小兄弟既会打游戏,又会考试的.高中时候用AK杀人几局下来都不用重新换子弹的,天天睡觉又是早恋的闭着眼考985啊.想当年..&lt;/p&gt;
     
     </summary>
     
@@ -328,7 +332,7 @@
     <link href="http://cnhao.com/2016/09/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E5%AD%97-%E5%AD%97%E9%95%BF-%E5%AD%97%E8%8A%82%E4%B8%8E%E4%BD%8D/"/>
     <id>http://cnhao.com/2016/09/27/计算机中字-字长-字节与位/</id>
     <published>2016-09-27T06:12:42.000Z</published>
-    <updated>2016-09-27T06:33:54.000Z</updated>
+    <updated>2017-12-27T13:18:06.936Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;抛开机器谈字长,都是耍流氓&lt;/p&gt;
@@ -339,9 +343,12 @@
 &lt;p&gt;bit就是一个二进制位.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;h2 id=&quot;字节-拜特-Byte&quot;&gt;&lt;a href=&quot;#字节-拜特-Byte&quot; class=&quot;headerlink&quot; title=&quot;字节==拜特==Byte&quot;&gt;&lt;/a&gt;字节==拜特==Byte&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机中以字节为单位存储和解释信息&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;1Byte == 8bit &lt;del&gt;我在8bit后面加不加s的问题上犹豫了五分钟🙄&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;一个字节可以存储一个ASCII码的内容&lt;/p&gt;
 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;  1Byte == 8bit &lt;del&gt;我在8bit后面加不加s的问题上犹豫了五分钟🙄&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;  一个字节可以存储一个ASCII码的内容&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;&lt;h2 id=&quot;字-word&quot;&gt;&lt;a href=&quot;#字-word&quot; class=&quot;headerlink&quot; title=&quot;字==word&quot;&gt;&lt;/a&gt;字==word&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机进行数据处理时,一次存取、加工和传送的数据长度称为字(word)。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;一个64位处理器顾名思义一次可以处理64个位,8个字节的数据,所以一个字长就是8&lt;/p&gt;
 &lt;p&gt;32位一个word就是4&lt;/p&gt;
@@ -359,7 +366,12 @@
 &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;h2 id=&quot;比特-位-bit&quot;&gt;&lt;a href=&quot;#比特-位-bit&quot; class=&quot;headerlink&quot; title=&quot;比特==位==bit&quot;&gt;&lt;/
+&lt;li&gt;&lt;h2 id=&quot;比特-位-bit&quot;&gt;&lt;a href=&quot;#比特-位-bit&quot; class=&quot;headerlink&quot; title=&quot;比特==位==bit&quot;&gt;&lt;/a&gt;比特==位==bit&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机存储的最小单位&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;bit就是一个二进制位.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;h2 id=&quot;字节-拜特-Byte&quot;&gt;&lt;a href=&quot;#字节-拜特-Byte&quot; class=&quot;headerlink&quot; title=&quot;字节==拜特==Byte&quot;&gt;&lt;/a&gt;字节==拜特==Byte&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机中以字节为单位存储和解释信息&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
@@ -373,12 +385,14 @@
     <link href="http://cnhao.com/2016/09/02/moveforward/"/>
     <id>http://cnhao.com/2016/09/02/moveforward/</id>
     <published>2016-09-02T12:41:59.000Z</published>
-    <updated>2017-12-27T13:15:01.098Z</updated>
+    <updated>2017-12-27T13:17:30.221Z</updated>
     
     <content type="html">&lt;h1 id=&quot;移动语义&quot;&gt;&lt;a href=&quot;#移动语义&quot; class=&quot;headerlink&quot; title=&quot;移动语义&quot;&gt;&lt;/a&gt;移动语义&lt;/h1&gt;&lt;p&gt;&lt;del&gt;关于左右值得问题看我另一篇文章&lt;/del&gt;.&lt;/p&gt;
 &lt;p&gt;移动语义是一种语义.被用来&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;对右值充分利用提高效率&lt;/p&gt;
-&lt;p&gt;譬如移动构造函数等.&lt;br&gt;&lt;img src=&quot;https://i.loli.net/2017/12/27/5a43960f03869.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;譬如移动构造函数等.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2017/12/27/5a43960f03869.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;典型应用&lt;/p&gt;
 &lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;template &amp;lt;class T&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;void swap(T &amp;amp;a, T &amp;amp;b)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    T tmp(std::move(a));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    a = std::move(b);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    b = std::move(tmp);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h1 id=&quot;move-amp-amp-forward&quot;&gt;&lt;a href=&quot;#move-amp-amp-forward&quot; class=&quot;headerlink&quot; title=&quot;move &amp;amp;&amp;amp; forward&quot;&gt;&lt;/a&gt;move &amp;amp;&amp;amp; forward&lt;/h1&gt;&lt;p&gt;move函数把左值转为右值引用,此值生命周期并未结束.&lt;/p&gt;
@@ -403,7 +417,6 @@
     
       &lt;h1 id=&quot;移动语义&quot;&gt;&lt;a href=&quot;#移动语义&quot; class=&quot;headerlink&quot; title=&quot;移动语义&quot;&gt;&lt;/a&gt;移动语义&lt;/h1&gt;&lt;p&gt;&lt;del&gt;关于左右值得问题看我另一篇文章&lt;/del&gt;.&lt;/p&gt;
 &lt;p&gt;移动语义是一种语义.被用来&lt;/p&gt;
-&lt;p&gt;对右值充分利
     
     </summary>
     
@@ -417,9 +430,10 @@
     <link href="http://cnhao.com/2016/08/31/homebrew/"/>
     <id>http://cnhao.com/2016/08/31/homebrew/</id>
     <published>2016-08-31T09:35:03.000Z</published>
-    <updated>2016-08-31T09:46:45.000Z</updated>
+    <updated>2017-12-27T13:18:20.564Z</updated>
     
     <content type="html">&lt;h3 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1. 安装&quot;&gt;&lt;/a&gt;1. 安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ruby &lt;span class=&quot;_&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;brew update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h3 id=&quot;2-版本&quot;&gt;&lt;a href=&quot;#2-版本&quot; class=&quot;headerlink&quot; title=&quot;2. 版本&quot;&gt;&lt;/a&gt;2. 版本&lt;/h3&gt;&lt;p&gt;之前旧版 &lt;code&gt;homebrew&lt;/code&gt; 里面,有一个 &lt;code&gt;brew versions ***&lt;/code&gt; 的命令,现在移除了.&lt;br&gt;需要安装&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew tap homebrew/versions&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;通过以下命令来选择版本:&lt;/p&gt;
@@ -433,7 +447,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1. 安装&quot;&gt;&lt;/a&gt;1. 安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;p
+      &lt;h3 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1. 安装&quot;&gt;&lt;/a&gt;1. 安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ruby &lt;span class=&quot;_&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;brew update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -447,10 +461,10 @@
     <link href="http://cnhao.com/2016/08/17/bitmap/"/>
     <id>http://cnhao.com/2016/08/17/bitmap/</id>
     <published>2016-08-17T06:03:16.000Z</published>
-    <updated>2016-09-27T06:27:16.000Z</updated>
+    <updated>2017-12-27T13:18:28.261Z</updated>
     
     <content type="html">&lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
-&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;/p&gt;
+&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;当一个基本定向的广告(&lt;strong&gt;上下线&lt;/strong&gt;,&lt;strong&gt;修改&lt;/strong&gt;等)由bp告知ws后,ws会转发给位图索引.&lt;/p&gt;
 &lt;p&gt;位图索引维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)&lt;/p&gt;
 &lt;hr&gt;
@@ -550,8 +564,7 @@
     <summary type="html">
     
       &lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
-&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;/p&gt;
-&lt;p&gt;当一个基本定向的广告(&lt;strong&gt;上下线&lt;/strong&gt;,&lt;
+&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;br&gt;
     
     </summary>
     
@@ -565,7 +578,7 @@
     <link href="http://cnhao.com/2016/08/17/%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%A7%88/"/>
     <id>http://cnhao.com/2016/08/17/广告投放系统概览/</id>
     <published>2016-08-17T02:30:32.000Z</published>
-    <updated>2016-09-27T06:38:35.000Z</updated>
+    <updated>2017-12-27T13:18:41.723Z</updated>
     
     <content type="html">&lt;p&gt;**广告系统分两大块主要的内容&lt;/p&gt;
 &lt;ol&gt;
@@ -575,6 +588,7 @@
 &lt;hr&gt;
 &lt;p&gt;这里说的广告主要指的是feed流里面的广告.&lt;/p&gt;
 &lt;p&gt;这个文章里的图代表是**收入最大的一块,粉丝通投放流程.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;粉丝通广告中还有一些特殊广告会有细微差别.&lt;/p&gt;
 &lt;p&gt;譬如应用家,品牌速递,账号推广,原生广告等.&lt;/p&gt;
 &lt;p&gt;以后想到什么了就说点.&lt;/p&gt;
@@ -594,7 +608,6 @@
 &lt;hr&gt;
 &lt;p&gt;这里说的广告主要指的是feed流里面的广告.&lt;/p&gt;
 &lt;p&gt;这个文章里的图代表是**收入最大的一块,粉丝通投放流程.&lt;/p&gt;
-&lt;p&gt;粉丝通广告中还有
     
     </summary>
     
@@ -608,9 +621,10 @@
     <link href="http://cnhao.com/2016/08/11/%E6%88%91%E7%90%86%E8%A7%A3%E4%B8%AD%E7%9A%84%E5%B7%A6%E5%80%BC-%E5%8F%B3%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/"/>
     <id>http://cnhao.com/2016/08/11/我理解中的左值-右值和引用/</id>
     <published>2016-08-11T05:40:28.000Z</published>
-    <updated>2016-08-11T07:27:52.000Z</updated>
+    <updated>2017-12-27T13:18:35.363Z</updated>
     
     <content type="html">&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;具名的,可取址的称为左值&lt;/li&gt;
@@ -642,7 +656,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就
+      &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
     
     </summary>
     
