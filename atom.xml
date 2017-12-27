@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnhao.com/"/>
-  <updated>2017-12-26T19:12:29.629Z</updated>
+  <updated>2017-12-27T08:14:04.150Z</updated>
   <id>http://cnhao.com/</id>
   
   <author>
@@ -16,18 +16,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>struct内存对齐</title>
-    <link href="http://cnhao.com/2017/12/27/struct/"/>
-    <id>http://cnhao.com/2017/12/27/struct/</id>
-    <published>2017-12-26T19:12:29.000Z</published>
-    <updated>2017-12-26T19:12:29.629Z</updated>
+    <title>内存对齐与游戏开发之比特流数据传输</title>
+    <link href="http://cnhao.com/2017/08/27/struct/"/>
+    <id>http://cnhao.com/2017/08/27/struct/</id>
+    <published>2017-08-27T05:12:29.000Z</published>
+    <updated>2017-12-27T08:14:04.150Z</updated>
     
-    <content type="html"></content>
+    <content type="html">&lt;p&gt;网上写的五花八门的快餐式教程和规则嵌套毫无灵魂.&lt;/p&gt;
+&lt;h1 id=&quot;为什么要对齐&quot;&gt;&lt;a href=&quot;#为什么要对齐&quot; class=&quot;headerlink&quot; title=&quot;为什么要对齐&quot;&gt;&lt;/a&gt;为什么要对齐&lt;/h1&gt;&lt;h1 id=&quot;什么时候使用-pragma-pack&quot;&gt;&lt;a href=&quot;#什么时候使用-pragma-pack&quot; class=&quot;headerlink&quot; title=&quot;什么时候使用#pragma pack&quot;&gt;&lt;/a&gt;什么时候使用&lt;code&gt;#pragma pack&lt;/code&gt;&lt;/h1&gt;&lt;h1 id=&quot;有什么工具可以检查&quot;&gt;&lt;a href=&quot;#有什么工具可以检查&quot; class=&quot;headerlink&quot; title=&quot;有什么工具可以检查&quot;&gt;&lt;/a&gt;有什么工具可以检查&lt;/h1&gt;&lt;h1 id=&quot;有什么例外&quot;&gt;&lt;a href=&quot;#有什么例外&quot; class=&quot;headerlink&quot; title=&quot;有什么例外&quot;&gt;&lt;/a&gt;有什么例外&lt;/h1&gt;&lt;p&gt;听听大师怎么说? &lt;del&gt;我就不复制粘贴了.&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/埃里克·雷蒙&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Eric S. Raymond&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.catb.org/esr/structure-packing/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;The Lost Art of C Structure Packing&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ludx/The-Lost-Art-of-C-Structure-Packing&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;翻译:失传的C结构体打包技艺&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;差不多已经讲解了这方面的我需要知道的知识的超集.&lt;/p&gt;
+&lt;p&gt;那么问题来了.我为什么要知道这些呢?如果没有碰到一个具体的事情,&lt;code&gt;sizeof(struct)&lt;/code&gt;这种事情可能永远只出现在面试题里.&lt;/p&gt;
+&lt;h1 id=&quot;比特流数据传输&quot;&gt;&lt;a href=&quot;#比特流数据传输&quot; class=&quot;headerlink&quot; title=&quot;比特流数据传输&quot;&gt;&lt;/a&gt;比特流数据传输&lt;/h1&gt;&lt;p&gt;在网络游戏中,数据传输是绕不开的话题.&lt;br&gt;这里说的不是进程通信IPC,也不是链路层,不是MTU,不是TCP,UDP,IP,不是分包路由,不是……=_=&lt;/p&gt;
+&lt;p&gt;我想说的是包在UDP/TCP头后面的真正的data.&lt;br&gt;目的当然很清晰,让他尽可能的小,降低带宽要求啊,降低延迟啊,blablabla,方法也很清晰,比特位操作.&lt;/p&gt;
+&lt;p&gt;假设我们有这样一个操作:&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//假设我们已经实现了这样一个类,他的对象会初始化一块内存出来,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//并有成员变量指向初始head以及内存容量capacity&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OutputMemoryBitStream ot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//往ot中写入13,用5个字节,写入52用6个字节&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ot.write(&lt;span class=&quot;number&quot;&gt;13&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ot.write(&lt;span class=&quot;number&quot;&gt;52&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;内存中&lt;strong&gt;对齐&lt;/strong&gt;后如下,所以为啥都对齐了呢,怎么就对齐了呢,对齐有啥好处呢,这就牵扯出了上面的问题,可以去看大师的文章.&lt;/p&gt;
+&lt;p&gt;| 0 | 0 | 0 | 0 | 0 | 0 | 0 |&lt;br&gt;| 0 | 0 | 0 | 0 | 0 | 0 | 0 | &lt;/p&gt;
+</content>
     
     <summary type="html">
     
+      &lt;p&gt;网上写的五花八门的快餐式教程和规则嵌套毫无灵魂.&lt;/p&gt;
+&lt;h1 id=&quot;为什么要对齐&quot;&gt;&lt;a href=&quot;#为什么要对齐&quot; class=&quot;headerlink&quot; title=&quot;为什么要对齐&quot;&gt;&lt;/a&gt;为什么要对齐&lt;/h1&gt;&lt;h1 id=&quot;什么时候使用-pragma-pac
+    
     </summary>
     
+    
+      <category term="C++" scheme="http://cnhao.com/tags/C/"/>
     
   </entry>
   
