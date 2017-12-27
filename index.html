@@ -337,20 +337,11 @@
 </blockquote>
 <p>差不多已经讲解了这方面的我需要知道的知识的超集.</p>
 <p>那么问题来了.我为什么要知道这些呢?因为最近在做的一件事情让我想起了这些.</p>
-<!--
-# 比特流数据传输
-
-在网络游戏中,数据传输是绕不开的话题.
-这里说的不是进程通信IPC,也不是链路层,不是MTU,不是TCP,UDP,IP,不是分包路由,不是......=_=
-
-我想说的是包在UDP/TCP头后面的真正的data.
-目的当然很清晰,让他尽可能的小,降低带宽要求啊,降低延迟啊,blablabla,方法也很清晰,比特位操作.核心的操作就是打破对齐.
-实现一套自己的读写规则.
-
-假设我们有这样一个操作:
-
+<h1 id="比特流数据传输"><a href="#比特流数据传输" class="headerlink" title="比特流数据传输"></a>比特流数据传输</h1><p>在网络游戏中,数据传输是绕不开的话题.<br>这里说的不是进程通信IPC,也不是链路层,不是MTU,不是TCP,UDP,IP,不是分包路由,不是……=_=</p>
+<p>我想说的是包在UDP/TCP头后面的真正的data.<br>目的当然很清晰,让他尽可能的小,降低带宽要求啊,降低延迟啊,blablabla,方法也很清晰,比特位操作.核心的操作就是打破对齐.<br>实现一套自己的读写规则.</p>
+<p>假设我们有这样一个操作:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设我们已经实现了这样一个类,他的对象会初始化一块内存出来,</span></span><br><span class="line"><span class="comment">//并有成员变量指向初始head以及内存容量capacity</span></span><br><span class="line">OutputMemoryBitStream ot;</span><br><span class="line"><span class="comment">//往ot中写入13,用5个bit,写入52用6个bit,</span></span><br><span class="line">ot.write(<span class="number">13</span>,<span class="number">5</span>);</span><br><span class="line">ot.write(<span class="number">52</span>,<span class="number">6</span>);</span><br></pre></td></tr></table></figure>
-<p>–&gt;<br><strong>还有一个重要假设,小端模式,intel架构的基本都是小端,主机平台将xbox之类的是大端</strong></p>
+<p><strong>还有一个重要假设,小端模式,intel架构的基本都是小端,主机平台将xbox之类的是大端</strong></p>
 <h2 id="关于大小端再多说一句"><a href="#关于大小端再多说一句" class="headerlink" title="关于大小端再多说一句:"></a>关于大小端再多说一句:</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">union</span> &#123; <span class="keyword">char</span> c[<span class="number">4</span>]; <span class="keyword">unsigned</span> <span class="keyword">int</span> l; &#125;</span><br><span class="line">    endian_test = &#123; &#123; <span class="string">'l'</span>, <span class="string">'?'</span>, <span class="string">'?'</span>, <span class="string">'b'</span> &#125; &#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ENDIANNESS ((char)endian_test.l)</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;ENDIANNESS&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
 <p>13内存:</p>
 <table>
@@ -488,7 +479,7 @@
 <li>bool类型.不用乘以8,需要特化一下.</li>
 </ol>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">void write(T inData,size_t inBitCount = sizeof(T)*8)&#123;</span><br><span class="line">  static_assert(std::is_arithmetic&lt;T&gt;::value||</span><br><span class="line">        std::is_enum&lt;T&gt;::value,"only primitive data types")</span><br><span class="line">  WriteBits(inData,inBitCount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
--->
+
           
         
       
