@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnhao.com/"/>
-  <updated>2017-12-27T11:17:01.874Z</updated>
+  <updated>2017-12-27T11:28:59.165Z</updated>
   <id>http://cnhao.com/</id>
   
   <author>
@@ -14,6 +14,22 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vector动态扩容</title>
+    <link href="http://cnhao.com/2017/12/27/vector/"/>
+    <id>http://cnhao.com/2017/12/27/vector/</id>
+    <published>2017-12-27T11:28:59.000Z</published>
+    <updated>2017-12-27T11:28:59.165Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>内存对齐与游戏开发之比特流数据传输</title>
