@@ -119,7 +119,7 @@ The Lost Art of C Structure Packing
 
 差不多已经讲解了这方面的我需要知道的知识的超集.
 那么问题来了.我为什么要知道">
-<meta property="og:updated_time" content="2017-12-27T10:51:58.018Z">
+<meta property="og:updated_time" content="2017-12-27T11:17:01.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存对齐与游戏开发之比特流数据传输">
 <meta name="twitter:description" content="网上写的五花八门的快餐式教程和规则嵌套毫无灵魂.
@@ -443,7 +443,7 @@ The Lost Art of C Structure Packing
 <th>0</th>
 <th>1</th>
 <th>1</th>
-<th>1</th>
+<th>0</th>
 </tr>
 </thead>
 <tbody>
@@ -491,7 +491,7 @@ The Lost Art of C Structure Packing
 <p>不多bb,先上代码</p>
 <hr>
 <h2 id="size-t"><a href="#size-t" class="headerlink" title="size_t"></a>size_t</h2><p>不行了又想bb两句了,<code>size_t</code>,<code>uint32_t</code>这些东西,众所周知他可以跨平台的使用,让代码移植性好,更不容易出错.但是我这人对这种点到为止的解释总是很难受,我加两句.</p>
-<p>size_t就是size type的意思,本意上他应该是作为<code>sizeof</code>的返回值的,不应该把他当做一个<code>unsigned int</code>去使用,他的使用场景应该是类似于<code>void* malloc(size_t)</code>或者如下图的第二个参数,就是一个用来表示大小的东西,就像一个接口,让人忽略他下面是啥,有没有符号那些乱七八糟的,另外一个<code>int</code>变量一定是小于等于机器字长,<code>size_t</code>一定不小于.好了好了.</p>
+<p>size_t就是size type的意思,本意上他应该是作为<code>sizeof</code>的返回值类型的,不应该把他当做一个<code>unsigned int</code>去使用,他的使用场景应该是类似于<code>void* malloc(size_t)</code>或者如下图的第二个参数,就是一个用来表示大小的东西,就像一个接口,让人忽略他下面是啥,有没有符号那些乱七八糟的,另外一个<code>int</code>变量一定是小于等于机器字长,<code>size_t</code>一定不小于.好了好了.</p>
 <hr>
 <h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> OutputMemoryBitStream::WriteBits(<span class="keyword">uint8_t</span> inData,<span class="keyword">size_t</span> inBitCount)&#123;</span><br><span class="line">  <span class="keyword">uint32_t</span> nextBitHead = mBitHead + <span class="keyword">static_cast</span>&lt;<span class="keyword">uint32_t</span>&gt;(inBitCount);</span><br><span class="line">  <span class="keyword">if</span>(nextBitHead &gt; mBitCapacity)&#123;</span><br><span class="line">    ReallocBuffer(<span class="built_in">std</span>::max(<span class="number">2</span>*mBitCapacity,nextBitHead);)</span><br><span class="line">    <span class="comment">//写到这我又有话想说了,为啥是乘以2来比呢.</span></span><br><span class="line">    <span class="comment">//算了,写了又删了,写到另一篇文章里吧.</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//计算偏移内存位置</span></span><br><span class="line">  <span class="keyword">uint32_t</span> byteoffset = mBitHead &gt;&gt; <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">uint32_t</span> bitoffset = mBitHead &amp; <span class="number">0x7</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//先得到有效bit等长的全1数据,然后与有效字节做与操作,再和新数据左移后的数据做或操作就合在一起啦.妙不妙.</span></span><br><span class="line">  <span class="keyword">uint8_t</span> currentMask = ~(<span class="number">0xff</span> &lt;&lt; bitoffset);</span><br><span class="line">  mBuffer[byteoffset] = (mBuffer[byteoffset] &amp; currentMask)</span><br><span class="line">          |(inData &lt;&lt; bitoffset);</span><br><span class="line"></span><br><span class="line"><span class="comment">//问题来了,合在一起以后有可能溢出这个字节.</span></span><br><span class="line">  <span class="keyword">uint32_t</span> bitFreeThisByte = <span class="number">8</span> - bitoffset;</span><br><span class="line">  <span class="keyword">if</span>(bitFreeThisByte &lt; inBitCount)&#123;</span><br><span class="line">    mBuffer[byteoffset+<span class="number">1</span>] = inData &gt;&gt; bitFreeThisByte;</span><br><span class="line">    <span class="comment">//这里indata右移,因为已经在上面合并处理在上个字节了.</span></span><br><span class="line">  &#125;</span><br><span class="line">  mBitHead = nextBitHead;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>最大缺点:麻烦!每次写个数据还要思考比特需求,而且也不是每个数据我们都知道大小的,所以通用用法当然是,比特需求等于size(type).</p>
