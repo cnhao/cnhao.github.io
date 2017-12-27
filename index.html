@@ -333,13 +333,149 @@
 <p><a href="http://www.catb.org/esr/structure-packing/" target="_blank" rel="external">The Lost Art of C Structure Packing</a></p>
 <p><a href="https://github.com/ludx/The-Lost-Art-of-C-Structure-Packing" target="_blank" rel="external">翻译:失传的C结构体打包技艺</a></p>
 <p>差不多已经讲解了这方面的我需要知道的知识的超集.</p>
-<p>那么问题来了.我为什么要知道这些呢?如果没有碰到一个具体的事情,<code>sizeof(struct)</code>这种事情可能永远只出现在面试题里.</p>
+<p>那么问题来了.我为什么要知道这些呢?因为最近在做的一件事情让我想起了这些.</p>
 <h1 id="比特流数据传输"><a href="#比特流数据传输" class="headerlink" title="比特流数据传输"></a>比特流数据传输</h1><p>在网络游戏中,数据传输是绕不开的话题.<br>这里说的不是进程通信IPC,也不是链路层,不是MTU,不是TCP,UDP,IP,不是分包路由,不是……=_=</p>
-<p>我想说的是包在UDP/TCP头后面的真正的data.<br>目的当然很清晰,让他尽可能的小,降低带宽要求啊,降低延迟啊,blablabla,方法也很清晰,比特位操作.</p>
+<p>我想说的是包在UDP/TCP头后面的真正的data.<br>目的当然很清晰,让他尽可能的小,降低带宽要求啊,降低延迟啊,blablabla,方法也很清晰,比特位操作.核心的操作就是打破对齐.<br>实现一套自己的读写规则.</p>
 <p>假设我们有这样一个操作:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设我们已经实现了这样一个类,他的对象会初始化一块内存出来,</span></span><br><span class="line"><span class="comment">//并有成员变量指向初始head以及内存容量capacity</span></span><br><span class="line">OutputMemoryBitStream ot;</span><br><span class="line"><span class="comment">//往ot中写入13,用5个字节,写入52用6个字节</span></span><br><span class="line">ot.write(<span class="number">13</span>,<span class="number">5</span>);</span><br><span class="line">ot.write(<span class="number">52</span>,<span class="number">6</span>);</span><br></pre></td></tr></table></figure>
-<p>内存中<strong>对齐</strong>后如下,所以为啥都对齐了呢,怎么就对齐了呢,对齐有啥好处呢,这就牵扯出了上面的问题,可以去看大师的文章.</p>
-<p>| 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>| 0 | 0 | 0 | 0 | 0 | 0 | 0 | </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设我们已经实现了这样一个类,他的对象会初始化一块内存出来,</span></span><br><span class="line"><span class="comment">//并有成员变量指向初始head以及内存容量capacity</span></span><br><span class="line">OutputMemoryBitStream ot;</span><br><span class="line"><span class="comment">//往ot中写入13,用5个bit,写入52用6个bit,</span></span><br><span class="line">ot.write(<span class="number">13</span>,<span class="number">5</span>);</span><br><span class="line">ot.write(<span class="number">52</span>,<span class="number">6</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>如果默认使用内存对齐</strong>,怎么就对齐了呢,对齐有啥好处呢,这就牵扯出了上面的问题,可以去看大师的文章.</p>
+<!-- **为了方便都假设32位机器吧,uint32_t** -->
+<p><strong>还有一个重要假设,小端模式,intel架构的基本都是小端,主机平台将xbox之类的是大端</strong></p>
+<p>关于大小端再多说一句:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">union</span> &#123; <span class="keyword">char</span> c[<span class="number">4</span>]; <span class="keyword">unsigned</span> <span class="keyword">int</span> l; &#125;</span><br><span class="line">    endian_test = &#123; &#123; <span class="string">'l'</span>, <span class="string">'?'</span>, <span class="string">'?'</span>, <span class="string">'b'</span> &#125; &#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ENDIANNESS ((char)endian_test.l)</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;ENDIANNESS&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
+<p>13内存:</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>1</th>
+<th>1</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>位</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>52内存:</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>0</th>
+<th>0</th>
+<th>1</th>
+<th>1</th>
+<th>0</th>
+<th>1</th>
+<th>0</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>位</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>上面的两个write,我们期望这样的结果:</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>1</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>1</th>
+<th>1</th>
+<th>0</th>
+<th>1</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>1</th>
+<th>1</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>比特位</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>字节位</td>
+<td>0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>可能看起来不太清晰,简单来说就是,13没用完第一个字节,剩下的空间用52填补,52多出来的高位存入下一个字节的地位.</p>
+<p>不多bb,先上代码</p>
+<p>不行了又想bb两句了,<code>size_t</code>,<code>uint32_t</code>这些东西,众所周知他可以跨平台的使用,让代码移植性好,更不容易出错.但是我这人对这种点到为止的解释总是很难受,我加两句.</p>
+<p>size_t就是size type的意思,本意上他应该是作为<code>sizeof</code>的返回值的,不应该把他当做一个<code>unsigned int</code>去使用,他的使用场景应该是类似于<code>void* malloc(size_t)</code>或者如下图的第二个参数,就是一个用来表示大小的东西,就像一个接口,让人忽略他下面是啥,有没有符号那些乱七八糟的,另外一个<code>int</code>变量一定是小于等于机器字长,<code>size_t</code>一定不小于.好了好了.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> OutputMemoryBitStream::WriteBits(<span class="keyword">uint8_t</span> inData,<span class="keyword">size_t</span> inBitCount)&#123;</span><br><span class="line">  <span class="keyword">uint32_t</span> nextBitHead = mBitHead + <span class="keyword">static_cast</span>&lt;<span class="keyword">uint32_t</span>&gt;(inBitCount);</span><br><span class="line">  <span class="keyword">if</span>(nextBitHead &gt; mBitCapacity)&#123;</span><br><span class="line">    ReallocBuffer(<span class="built_in">std</span>::max(<span class="number">2</span>*mBitCapacity,nextBitHead);)</span><br><span class="line">    <span class="comment">//写到这我又有话想说了,为啥是乘以2来比呢.</span></span><br><span class="line">    <span class="comment">//算了,写了又删了,写到另一篇文章里吧.</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//计算偏移内存位置</span></span><br><span class="line">  <span class="keyword">uint32_t</span> byteoffset = mBitHead &gt;&gt; <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">uint32_t</span> bitoffset = mBitHead &amp; <span class="number">0x7</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//先得到有效bit等长的全1数据,然后与有效字节做与操作,再和新数据左移后的数据做或操作就合在一起啦.妙不妙.</span></span><br><span class="line">  <span class="keyword">uint8_t</span> currentMask = ~(<span class="number">0xff</span> &lt;&lt; bitoffset);</span><br><span class="line">  mBuffer[byteoffset] = (mBuffer[byteoffset] &amp; currentMask)</span><br><span class="line">          |(inData &lt;&lt; bitoffset);</span><br><span class="line"></span><br><span class="line"><span class="comment">//问题来了,合在一起以后有可能溢出这个字节.</span></span><br><span class="line">  <span class="keyword">uint32_t</span> bitFreeThisByte = <span class="number">8</span> - bitoffset;</span><br><span class="line">  <span class="keyword">if</span>(bitFreeThisByte &lt; inBitCount)&#123;</span><br><span class="line">    mBuffer[byteoffset+<span class="number">1</span>] = inData &gt;&gt; bitFreeThisByte;</span><br><span class="line">    <span class="comment">//这里indata右移,因为已经在上面合并处理在上个字节了.</span></span><br><span class="line">  &#125;</span><br><span class="line">  mBitHead = nextBitHead;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最大缺点:麻烦!每次写个数据还要思考比特需求,而且也不是每个数据我们都知道大小的,所以通用用法当然是,比特需求等于size(type).</p>
+<p>注意两点:</p>
+<ol>
+<li>只有当需要的bit数比数据本身的比特数小的时候才手动指定</li>
+<li>bool类型.不用乘以8,需要特化一下.</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">void write(T inData,size_t inBitCount = sizeof(T)*8)&#123;</span><br><span class="line">  static_assert(std::is_arithmetic&lt;T&gt;::value||</span><br><span class="line">        std::is_enum&lt;T&gt;::value,"only primitive data types")</span><br><span class="line">  WriteBits(inData,inBitCount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
