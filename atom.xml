@@ -552,95 +552,11 @@
   </entry>
   
   <entry>
-    <title>计算机中字,字长,字节与位</title>
-    <link href="http://cnhao.com/2016/09/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E5%AD%97-%E5%AD%97%E9%95%BF-%E5%AD%97%E8%8A%82%E4%B8%8E%E4%BD%8D/"/>
-    <id>http://cnhao.com/2016/09/27/计算机中字-字长-字节与位/</id>
-    <published>2016-09-27T06:12:42.000Z</published>
-    <updated>2017-12-27T13:18:06.936Z</updated>
-    
-    <content type="html">&lt;blockquote&gt;
-&lt;p&gt;抛开机器谈字长,都是耍流氓&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;h2 id=&quot;比特-位-bit&quot;&gt;&lt;a href=&quot;#比特-位-bit&quot; class=&quot;headerlink&quot; title=&quot;比特==位==bit&quot;&gt;&lt;/a&gt;比特==位==bit&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机存储的最小单位&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;bit就是一个二进制位.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;h2 id=&quot;字节-拜特-Byte&quot;&gt;&lt;a href=&quot;#字节-拜特-Byte&quot; class=&quot;headerlink&quot; title=&quot;字节==拜特==Byte&quot;&gt;&lt;/a&gt;字节==拜特==Byte&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机中以字节为单位存储和解释信息&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;  1Byte == 8bit &lt;del&gt;我在8bit后面加不加s的问题上犹豫了五分钟🙄&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;  一个字节可以存储一个ASCII码的内容&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;h2 id=&quot;字-word&quot;&gt;&lt;a href=&quot;#字-word&quot; class=&quot;headerlink&quot; title=&quot;字==word&quot;&gt;&lt;/a&gt;字==word&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机进行数据处理时,一次存取、加工和传送的数据长度称为字(word)。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;一个64位处理器顾名思义一次可以处理64个位,8个字节的数据,所以一个字长就是8&lt;/p&gt;
-&lt;p&gt;32位一个word就是4&lt;/p&gt;
-&lt;p&gt;c++里一个指针就占用一个机器字长的长度.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;h2 id=&quot;字长&quot;&gt;&lt;a href=&quot;#字长&quot; class=&quot;headerlink&quot; title=&quot;字长&quot;&gt;&lt;/a&gt;字长&lt;/h2&gt;&lt;p&gt;字长就是计算机字的长度,64位的计算机的字长就是64.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;抛开机器谈字长,都是耍流氓&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;h2 id=&quot;比特-位-bit&quot;&gt;&lt;a href=&quot;#比特-位-bit&quot; class=&quot;headerlink&quot; title=&quot;比特==位==bit&quot;&gt;&lt;/a&gt;比特==位==bit&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机存储的最小单位&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;bit就是一个二进制位.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;h2 id=&quot;字节-拜特-Byte&quot;&gt;&lt;a href=&quot;#字节-拜特-Byte&quot; class=&quot;headerlink&quot; title=&quot;字节==拜特==Byte&quot;&gt;&lt;/a&gt;字节==拜特==Byte&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机中以字节为单位存储和解释信息&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://cnhao.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mac下brew安装制定版本</title>
-    <link href="http://cnhao.com/2016/08/31/homebrew/"/>
-    <id>http://cnhao.com/2016/08/31/homebrew/</id>
-    <published>2016-08-31T09:35:03.000Z</published>
-    <updated>2017-12-27T13:18:20.564Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1. 安装&quot;&gt;&lt;/a&gt;1. 安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ruby &lt;span class=&quot;_&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;brew update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;2-版本&quot;&gt;&lt;a href=&quot;#2-版本&quot; class=&quot;headerlink&quot; title=&quot;2. 版本&quot;&gt;&lt;/a&gt;2. 版本&lt;/h3&gt;&lt;p&gt;之前旧版 &lt;code&gt;homebrew&lt;/code&gt; 里面,有一个 &lt;code&gt;brew versions ***&lt;/code&gt; 的命令,现在移除了.&lt;br&gt;需要安装&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew tap homebrew/versions&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;通过以下命令来选择版本:&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew install homebrew/versions/lua&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;hr&gt;
-&lt;p&gt;或者使用以下命令来选择:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;home search ***&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;3-安装&quot;&gt;&lt;a href=&quot;#3-安装&quot; class=&quot;headerlink&quot; title=&quot;3. 安装&quot;&gt;&lt;/a&gt;3. 安装&lt;/h3&gt;&lt;p&gt;选定安装,done&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew install homebrew/versions/lua53&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1. 安装&quot;&gt;&lt;/a&gt;1. 安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ruby &lt;span class=&quot;_&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;brew update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="Macosx" scheme="http://cnhao.com/tags/Macosx/"/>
-    
-  </entry>
-  
-  <entry>
     <title>位图索引</title>
-    <link href="http://cnhao.com/2016/08/17/bitmap/"/>
-    <id>http://cnhao.com/2016/08/17/bitmap/</id>
-    <published>2016-08-17T06:03:16.000Z</published>
-    <updated>2017-12-27T13:18:28.261Z</updated>
+    <link href="http://cnhao.com/2016/09/05/bitmap/"/>
+    <id>http://cnhao.com/2016/09/05/bitmap/</id>
+    <published>2016-09-05T06:03:16.000Z</published>
+    <updated>2017-12-28T18:57:31.223Z</updated>
     
     <content type="html">&lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
 &lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -754,10 +670,10 @@
   
   <entry>
     <title>广告投放系统概览</title>
-    <link href="http://cnhao.com/2016/08/17/%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%A7%88/"/>
-    <id>http://cnhao.com/2016/08/17/广告投放系统概览/</id>
-    <published>2016-08-17T02:30:32.000Z</published>
-    <updated>2017-12-27T13:18:41.723Z</updated>
+    <link href="http://cnhao.com/2016/09/02/%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%A7%88/"/>
+    <id>http://cnhao.com/2016/09/02/广告投放系统概览/</id>
+    <published>2016-09-02T02:30:32.000Z</published>
+    <updated>2017-12-28T18:57:21.969Z</updated>
     
     <content type="html">&lt;p&gt;**广告系统分两大块主要的内容&lt;/p&gt;
 &lt;ol&gt;
@@ -792,6 +708,90 @@
     
     
       <category term="广告引擎" scheme="http://cnhao.com/tags/%E5%B9%BF%E5%91%8A%E5%BC%95%E6%93%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算机中字,字长,字节与位</title>
+    <link href="http://cnhao.com/2016/08/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E5%AD%97-%E5%AD%97%E9%95%BF-%E5%AD%97%E8%8A%82%E4%B8%8E%E4%BD%8D/"/>
+    <id>http://cnhao.com/2016/08/29/计算机中字-字长-字节与位/</id>
+    <published>2016-08-29T06:12:42.000Z</published>
+    <updated>2017-12-28T18:58:01.511Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;抛开机器谈字长,都是耍流氓&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;h2 id=&quot;比特-位-bit&quot;&gt;&lt;a href=&quot;#比特-位-bit&quot; class=&quot;headerlink&quot; title=&quot;比特==位==bit&quot;&gt;&lt;/a&gt;比特==位==bit&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机存储的最小单位&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;bit就是一个二进制位.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;h2 id=&quot;字节-拜特-Byte&quot;&gt;&lt;a href=&quot;#字节-拜特-Byte&quot; class=&quot;headerlink&quot; title=&quot;字节==拜特==Byte&quot;&gt;&lt;/a&gt;字节==拜特==Byte&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机中以字节为单位存储和解释信息&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;  1Byte == 8bit &lt;del&gt;我在8bit后面加不加s的问题上犹豫了五分钟🙄&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;  一个字节可以存储一个ASCII码的内容&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;h2 id=&quot;字-word&quot;&gt;&lt;a href=&quot;#字-word&quot; class=&quot;headerlink&quot; title=&quot;字==word&quot;&gt;&lt;/a&gt;字==word&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机进行数据处理时,一次存取、加工和传送的数据长度称为字(word)。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一个64位处理器顾名思义一次可以处理64个位,8个字节的数据,所以一个字长就是8&lt;/p&gt;
+&lt;p&gt;32位一个word就是4&lt;/p&gt;
+&lt;p&gt;c++里一个指针就占用一个机器字长的长度.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;h2 id=&quot;字长&quot;&gt;&lt;a href=&quot;#字长&quot; class=&quot;headerlink&quot; title=&quot;字长&quot;&gt;&lt;/a&gt;字长&lt;/h2&gt;&lt;p&gt;字长就是计算机字的长度,64位的计算机的字长就是64.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;抛开机器谈字长,都是耍流氓&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;h2 id=&quot;比特-位-bit&quot;&gt;&lt;a href=&quot;#比特-位-bit&quot; class=&quot;headerlink&quot; title=&quot;比特==位==bit&quot;&gt;&lt;/a&gt;比特==位==bit&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机存储的最小单位&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;bit就是一个二进制位.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;h2 id=&quot;字节-拜特-Byte&quot;&gt;&lt;a href=&quot;#字节-拜特-Byte&quot; class=&quot;headerlink&quot; title=&quot;字节==拜特==Byte&quot;&gt;&lt;/a&gt;字节==拜特==Byte&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;计算机中以字节为单位存储和解释信息&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://cnhao.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac下brew安装制定版本</title>
+    <link href="http://cnhao.com/2016/08/21/homebrew/"/>
+    <id>http://cnhao.com/2016/08/21/homebrew/</id>
+    <published>2016-08-21T09:35:03.000Z</published>
+    <updated>2017-12-28T18:56:57.594Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1. 安装&quot;&gt;&lt;/a&gt;1. 安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ruby &lt;span class=&quot;_&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;brew update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;2-版本&quot;&gt;&lt;a href=&quot;#2-版本&quot; class=&quot;headerlink&quot; title=&quot;2. 版本&quot;&gt;&lt;/a&gt;2. 版本&lt;/h3&gt;&lt;p&gt;之前旧版 &lt;code&gt;homebrew&lt;/code&gt; 里面,有一个 &lt;code&gt;brew versions ***&lt;/code&gt; 的命令,现在移除了.&lt;br&gt;需要安装&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew tap homebrew/versions&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;通过以下命令来选择版本:&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew install homebrew/versions/lua&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;p&gt;或者使用以下命令来选择:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;home search ***&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;3-安装&quot;&gt;&lt;a href=&quot;#3-安装&quot; class=&quot;headerlink&quot; title=&quot;3. 安装&quot;&gt;&lt;/a&gt;3. 安装&lt;/h3&gt;&lt;p&gt;选定安装,done&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew install homebrew/versions/lua53&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1. 安装&quot;&gt;&lt;/a&gt;1. 安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ruby &lt;span class=&quot;_&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;brew update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Macosx" scheme="http://cnhao.com/tags/Macosx/"/>
     
   </entry>
   
