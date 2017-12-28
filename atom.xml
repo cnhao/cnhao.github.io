@@ -59,9 +59,9 @@
     </summary>
     
     
-      <category term="随笔" scheme="http://cnhao.com/tags/%E9%9A%8F%E7%AC%94/"/>
-    
       <category term="游戏开发" scheme="http://cnhao.com/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="随笔" scheme="http://cnhao.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
@@ -491,10 +491,10 @@
   
   <entry>
     <title>我理解中的左值,右值和引用</title>
-    <link href="http://cnhao.com/2017/07/11/%E6%88%91%E7%90%86%E8%A7%A3%E4%B8%AD%E7%9A%84%E5%B7%A6%E5%80%BC-%E5%8F%B3%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/"/>
-    <id>http://cnhao.com/2017/07/11/我理解中的左值-右值和引用/</id>
+    <link href="http://cnhao.com/2017/07/11/value/"/>
+    <id>http://cnhao.com/2017/07/11/value/</id>
     <published>2017-07-11T05:40:28.000Z</published>
-    <updated>2017-12-28T18:41:14.221Z</updated>
+    <updated>2017-12-28T18:59:52.294Z</updated>
     
     <content type="html">&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -556,10 +556,10 @@
     <link href="http://cnhao.com/2016/09/05/bitmap/"/>
     <id>http://cnhao.com/2016/09/05/bitmap/</id>
     <published>2016-09-05T06:03:16.000Z</published>
-    <updated>2017-12-28T18:57:31.223Z</updated>
+    <updated>2017-12-28T18:59:05.728Z</updated>
     
     <content type="html">&lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
-&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;/p&gt;
 &lt;p&gt;当一个基本定向的广告(&lt;strong&gt;上下线&lt;/strong&gt;,&lt;strong&gt;修改&lt;/strong&gt;等)由bp告知ws后,ws会转发给位图索引.&lt;/p&gt;
 &lt;p&gt;位图索引维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)&lt;/p&gt;
 &lt;hr&gt;
@@ -642,6 +642,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;兴趣位图,位置位图等都是类似的结构.&lt;/p&gt;
 &lt;p&gt;左边第一列就是这个维度的所有枚举值,这一行剩下的每一个位置都代表了某广告计划是否选择了这个维度的这个枚举值进行投放.&lt;/p&gt;
 &lt;p&gt;譬如一个广告计划是对北京,20-25岁,女性进行投放,那么就分别对这三个特征维度的位图更新&lt;/p&gt;
@@ -659,7 +660,89 @@
     <summary type="html">
     
       &lt;p&gt;说一下之前投放系统概述里说到过的位图索引–Bitmap索引.&lt;/p&gt;
-&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;br&gt;
+&lt;p&gt;这一块应该也是业务逻辑为主要内容的工作中最有&lt;strong&gt;&lt;em&gt;Trick&lt;/em&gt;&lt;/strong&gt;的部分了.&lt;/p&gt;
+&lt;p&gt;当一个基本定向的广告(&lt;strong&gt;上下线&lt;/strong&gt;,&lt;strong&gt;修改&lt;/strong&gt;等)由bp告知ws后,ws会转发给位图索引.&lt;/p&gt;
+&lt;p&gt;位图索引维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Age位图:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;adid_1&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;adid_2&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;…&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;adid_20&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;…&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;20&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;21&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;22&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;20&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;21&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;…&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;43&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
     
     </summary>
     
@@ -670,8 +753,8 @@
   
   <entry>
     <title>广告投放系统概览</title>
-    <link href="http://cnhao.com/2016/09/02/%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%A7%88/"/>
-    <id>http://cnhao.com/2016/09/02/广告投放系统概览/</id>
+    <link href="http://cnhao.com/2016/09/02/ad/"/>
+    <id>http://cnhao.com/2016/09/02/ad/</id>
     <published>2016-09-02T02:30:32.000Z</published>
     <updated>2017-12-28T18:57:21.969Z</updated>
     
@@ -713,8 +796,8 @@
   
   <entry>
     <title>计算机中字,字长,字节与位</title>
-    <link href="http://cnhao.com/2016/08/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E5%AD%97-%E5%AD%97%E9%95%BF-%E5%AD%97%E8%8A%82%E4%B8%8E%E4%BD%8D/"/>
-    <id>http://cnhao.com/2016/08/29/计算机中字-字长-字节与位/</id>
+    <link href="http://cnhao.com/2016/08/29/byte/"/>
+    <id>http://cnhao.com/2016/08/29/byte/</id>
     <published>2016-08-29T06:12:42.000Z</published>
     <updated>2017-12-28T18:58:01.511Z</updated>
     

@@ -1106,7 +1106,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cnhao.com/2017/07/11/我理解中的左值-右值和引用/">
+    <link itemprop="mainEntityOfPage" href="http://cnhao.com/2017/07/11/value/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cnhao">
@@ -1125,7 +1125,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/11/我理解中的左值-右值和引用/" itemprop="url">我理解中的左值,右值和引用</a></h1>
+                <a class="post-title-link" href="/2017/07/11/value/" itemprop="url">我理解中的左值,右值和引用</a></h1>
         
 
         <div class="post-meta">
@@ -1189,7 +1189,7 @@
 <p>函数<code>ReturnRvalue()</code>返回一个临时变量(**将亡值</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/11/我理解中的左值-右值和引用/#more" rel="contents">
+            <a class="btn" href="/2017/07/11/value/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1303,7 +1303,89 @@
       
         
           <p>说一下之前投放系统概述里说到过的位图索引–Bitmap索引.</p>
-<p>这一块应该也是业务逻辑为主要内容的工作中最有<strong><em>Trick</em></strong>的部分了.<br>
+<p>这一块应该也是业务逻辑为主要内容的工作中最有<strong><em>Trick</em></strong>的部分了.</p>
+<p>当一个基本定向的广告(<strong>上下线</strong>,<strong>修改</strong>等)由bp告知ws后,ws会转发给位图索引.</p>
+<p>位图索引维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)</p>
+<hr>
+<p>Age位图:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">adid_1</th>
+<th style="text-align:center">adid_2</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">adid_20</th>
+<th style="text-align:center">…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">21</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">22</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">21</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">..</td>
+<td style="text-align:center">..</td>
+<td style="text-align:center">..</td>
+<td style="text-align:center">..</td>
+<td style="text-align:center">..</td>
+</tr>
+<tr>
+<td style="text-align:center">43</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">..</td>
+<td style="text-align:center">..</td>
+<td style="text-align:center">..</td>
+<td style="text-align:center">..</td>
+<td style="text-align:center">..</td>
+<td style="text-align:center">..</td>
+</tr>
+</tbody>
+</table>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/09/05/bitmap/#more" rel="contents">
@@ -1352,7 +1434,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cnhao.com/2016/09/02/广告投放系统概览/">
+    <link itemprop="mainEntityOfPage" href="http://cnhao.com/2016/09/02/ad/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cnhao">
@@ -1371,7 +1453,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/09/02/广告投放系统概览/" itemprop="url">广告投放系统概览</a></h1>
+                <a class="post-title-link" href="/2016/09/02/ad/" itemprop="url">广告投放系统概览</a></h1>
         
 
         <div class="post-meta">
@@ -1429,7 +1511,7 @@
 <p>这个文章里的图代表是**收入最大的一块,粉丝通投放流程.</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/09/02/广告投放系统概览/#more" rel="contents">
+            <a class="btn" href="/2016/09/02/ad/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

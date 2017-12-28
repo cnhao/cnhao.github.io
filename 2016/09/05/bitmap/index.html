@@ -96,18 +96,96 @@
 
 
 <meta name="description" content="说一下之前投放系统概述里说到过的位图索引–Bitmap索引.
-这一块应该也是业务逻辑为主要内容的工作中最有Trick的部分了.">
+这一块应该也是业务逻辑为主要内容的工作中最有Trick的部分了.
+当一个基本定向的广告(上下线,修改等)由bp告知ws后,ws会转发给位图索引.
+位图索引维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)
+
+Age位图:
+
+
+
+
+adid_1
+adid_2
+…
+adid_20
+…
+
+
+
+
+20
+0
+0
+1
+1
+0
+
+
+21">
 <meta property="og:type" content="article">
 <meta property="og:title" content="位图索引">
 <meta property="og:url" content="http://cnhao.com/2016/09/05/bitmap/index.html">
 <meta property="og:site_name" content="艾泽拉斯">
 <meta property="og:description" content="说一下之前投放系统概述里说到过的位图索引–Bitmap索引.
-这一块应该也是业务逻辑为主要内容的工作中最有Trick的部分了.">
-<meta property="og:updated_time" content="2017-12-28T18:57:31.223Z">
+这一块应该也是业务逻辑为主要内容的工作中最有Trick的部分了.
+当一个基本定向的广告(上下线,修改等)由bp告知ws后,ws会转发给位图索引.
+位图索引维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)
+
+Age位图:
+
+
+
+
+adid_1
+adid_2
+…
+adid_20
+…
+
+
+
+
+20
+0
+0
+1
+1
+0
+
+
+21">
+<meta property="og:updated_time" content="2017-12-28T18:59:05.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位图索引">
 <meta name="twitter:description" content="说一下之前投放系统概述里说到过的位图索引–Bitmap索引.
-这一块应该也是业务逻辑为主要内容的工作中最有Trick的部分了.">
+这一块应该也是业务逻辑为主要内容的工作中最有Trick的部分了.
+当一个基本定向的广告(上下线,修改等)由bp告知ws后,ws会转发给位图索引.
+位图索引维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)
+
+Age位图:
+
+
+
+
+adid_1
+adid_2
+…
+adid_20
+…
+
+
+
+
+20
+0
+0
+1
+1
+0
+
+
+21">
 
 
 
@@ -326,7 +404,7 @@
 
       
         <p>说一下之前投放系统概述里说到过的位图索引–Bitmap索引.</p>
-<p>这一块应该也是业务逻辑为主要内容的工作中最有<strong><em>Trick</em></strong>的部分了.<br><a id="more"></a></p>
+<p>这一块应该也是业务逻辑为主要内容的工作中最有<strong><em>Trick</em></strong>的部分了.</p>
 <p>当一个基本定向的广告(<strong>上下线</strong>,<strong>修改</strong>等)由bp告知ws后,ws会转发给位图索引.</p>
 <p>位图索引维护N个位图.N为维度个数.(譬如年龄,兴趣,位置,性别等等)</p>
 <hr>
@@ -409,6 +487,7 @@
 </tr>
 </tbody>
 </table>
+<a id="more"></a>
 <p>兴趣位图,位置位图等都是类似的结构.</p>
 <p>左边第一列就是这个维度的所有枚举值,这一行剩下的每一个位置都代表了某广告计划是否选择了这个维度的这个枚举值进行投放.</p>
 <p>譬如一个广告计划是对北京,20-25岁,女性进行投放,那么就分别对这三个特征维度的位图更新</p>
@@ -463,7 +542,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/02/广告投放系统概览/" rel="next" title="广告投放系统概览">
+              <a href="/2016/09/02/ad/" rel="next" title="广告投放系统概览">
                 <i class="fa fa-chevron-left"></i> 广告投放系统概览
               </a>
             
@@ -473,7 +552,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/11/我理解中的左值-右值和引用/" rel="prev" title="我理解中的左值,右值和引用">
+              <a href="/2017/07/11/value/" rel="prev" title="我理解中的左值,右值和引用">
                 我理解中的左值,右值和引用 <i class="fa fa-chevron-right"></i>
               </a>
             
