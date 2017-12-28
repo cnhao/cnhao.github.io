@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnhao.com/"/>
-  <updated>2017-12-28T17:39:51.537Z</updated>
+  <updated>2017-12-28T18:31:37.897Z</updated>
   <id>http://cnhao.com/</id>
   
   <author>
@@ -16,57 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>客户端重放与航位预测</title>
-    <link href="http://cnhao.com/2017/12/28/delay/"/>
-    <id>http://cnhao.com/2017/12/28/delay/</id>
-    <published>2017-12-28T12:30:04.000Z</published>
-    <updated>2017-12-28T17:39:51.537Z</updated>
-    
-    <content type="html">&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/chezhan.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;为了年前能找个游戏后台的工作,最近一直在学习相关知识.&lt;br&gt;因为没有需求只能自己给自己提需求.&lt;/p&gt;
-&lt;p&gt;首先假设我们在做的是一款移动射击游戏,后台开发这点比较好,比较友好的屏蔽了2D或者3D,arpg还是mmo,虽然我也想做那些,但是和我工作跨度太大,那些只能先进门后再修行了.心中对那个光影的世界还是有梦的好吧.&lt;/p&gt;
-&lt;p&gt;之前有关注了一段时间王者荣耀,发现其实MOBA游戏后台实现方式还是比较五花八门的,每个公司各显神通.&lt;/p&gt;
-&lt;p&gt;天美的做法是帧同步,不同于以前war3的那种典型的lockstep,走的应该还是CS架构,所有的客户端上传命令,服务器负责转发,他们给五个客户端分配不同的随机算子&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;,这样五个客户端就像五个播放器,逐帧的去播放指令就好,但是指令肯定不是逐帧到达的,所以是插值播放动画,服务器会检查一致性,排查异常原因.&lt;/p&gt;
-&lt;p&gt;这样的话游戏大体分为三个层,一个就是最上层,你手指头按的到的真实的游戏,一层是游戏数据运算,普攻,甩技能的计算判定等等,然后第三层就算是服务器.可以想到这样子的话制作回放和保存录像肯定是非常方便的,如果你卡了,你的包传不到服务器,服务器也不会转发你的包,在别人看来你就是不动,等你卡完了发现自己秒死,丢包的话他们的做法好像是增加冗余之类的方法,每次给这个客户端发包都带一些老包,也能指定重发一些确认丢失的关键帧,从缓存里直接按帧ID取出来发就行,很方便.但是如果掉线的话…应该就只能从头快进了.为什么研究研究着换方向了呢….这个话题就很悲伤了,我带applecare的亮黑7plus被偷了.然后从那晚起,我再也没玩过这个游戏.&lt;/p&gt;
-&lt;p&gt;转战射击游戏,CS,COD,守望先锋,H1Z1,当然还有现象级的PUBG..手游射击暂时不提,个人觉得fps游戏,怎么也得pc,没键盘鼠标蓝瘦啊,手游就玩玩适合手游的,moba有声有色,各种独立游戏,休闲小游戏,回合制肝游戏都很出彩,多多利用碎片化时间,吸钱网游就别装,可着劲儿努力好好吸一波,xbox的暗黑3就是比pc舒服很多,塞尔达+NS也是绝配不是么.各有各的好处,这里有点看不太懂网易游戏,也忒极端了,以前端游+代理也是有声有色的,错过了一波页游,当然可能是不屑,然后赶上一波手游,完全气质变了啊,我玩wow时候那个网易去哪儿了,现在感觉完全…不好描述&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;受不鸟了受不鸟了,我从未来穿越回来插播一条新闻,哈哈哈哈哈哈,网易来了个骚操作,荒野求生PC版全国首款端游吃鸡之手游模拟器,真鸡儿666,真的是想唱一首凉凉送给你….&lt;/em&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;与帧同步不同,考虑作弊情况还有特性,对每个客户端所见之间的同步没有对延迟以及手感的要求高,另外还有数据和带宽的问题,fps游戏一般多采用状态同步.也就是有一个权威服务器来做游戏模拟来最终唯一判定各个客户端的状态.&lt;/p&gt;
-&lt;p&gt;先不考虑ack和冗余,最简单的实现,你按w键想往前走,你的游戏每帧会处理游戏输入,于是你的w按键状态被记录,假设每秒以一定的频率采集一次input,然后(dirty状态+当前帧时间+两次采集的真实时间间隔),作为一个move包上传服务器,插一句,因为服务器和客户端的时钟可能不同,所以要上传自己的时间戳,这样来计算rtt才是相对准确的,客户端重放也要用到这个时间戳.服务器收到后异步的先把move消费出来放unProcessedPackets队列,逐帧模拟的时候消化队列,根据ip去找到正确的对象代理来模拟deltaTime的move,然后新的位置,速度,旋转回传.&lt;/p&gt;
-&lt;p&gt;这样有一个问题,当一个命令从客户端到服务器,再从服务器传回客户端执行,这经历了一个严重影响手感的rtt.&lt;/p&gt;
-&lt;p&gt;游戏里一切以服务器为准,那么显而易见你在游戏里看到的玩家的状态,比他们的服务器状态滞后了1/2个rtt,另外正常的游戏不可能花费好几帧不动来等服务器的包,都是插值模拟,假设从收到一个包,到顺滑的展现出这个包的动作需要的时间为ip,那么情况只会更糟,延迟为1/2*rtt+ip.但插值这个ip时间换来的是更加顺滑的操作体验,再加上摄像机可以由玩家自己移动,相比不插值还是要好很多.至少你不会大叫&lt;code&gt;卡卡卡&lt;/code&gt;,你可能会说&lt;code&gt;这游戏延迟有点高啊熊dei&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;解决方案就是预测他们的位置,在渲染他们之前,假定他们保持最新的包里的动作(方向,速度,旋转)不变,再模拟1/2个rtt,如果他们确实在下一个状态包到来的时候,之间状态没有变过,那么新的预测肯定是现在的位置一致.&lt;/p&gt;
-&lt;p&gt;如果不一致,譬如你看到的玩家停止奔跑开始设计,你拿到新的状态和位置后往前模拟,发现你的客户端展现的他的位置有偏差,就以服务器为准进行调整,注意,调整的位置依然向前模拟后的.&lt;/p&gt;
-&lt;p&gt;这对于非本地玩家很有效,但自己的游戏体验会很差.&lt;br&gt;因为无论你怎么做,怎么预测,你按下一个按钮,到收到反馈,至少都会经历一个rtt.&lt;/p&gt;
-&lt;p&gt;做法就是客户端重放.&lt;br&gt;当你按下按钮的时候,你本地就渲染这个动作,跟网络比起来,机器的延迟简直可以忽略了.核心就是保存客户端发出的move队列,当你收到了来自服务器的一个处理过的MoveList的时候,从list里取出mLastMoveTimestamp,和当前时钟时间比较算出rtt,然后去保存的move列表中删除在这个时间点以前的所有move.&lt;del&gt;关于ack和冗余来弥补UDP的缺点改天再换个地方说吧&lt;/del&gt;.&lt;/p&gt;
-&lt;p&gt;最后本地客户端,把收到的服务器的move都处理完,在这个基础上把本地movelist剩余的所有服务器未见的move,再模拟一遍.&lt;/p&gt;
-&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReadAndDo();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Simulate();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;如果服务器没有发生什么意外,那么执行后的结果应该与read之前完全一致.什么是意外呢.&lt;/p&gt;
-&lt;p&gt;譬如你正跑的欢,被98K一枪爆头.就像人生.&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/chezhan.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;为了年前能找个游戏后台的工作,最近一直在学习相关知识.&lt;br&gt;因为没有需求只能自己给自己提需求.&lt;/p&gt;
-&lt;p&gt;首先假设我们在做的是一款移动射击游戏,后台开发这点比较好,比较友好的屏蔽了2D或者3D,arpg还是mmo,虽然我也想做那些,但是和我工作跨度太大,那些只能先进门后再修行了.心中对那个光影的世界还是有梦的好吧.&lt;/p&gt;
-&lt;p&gt;之前有关注了一段时间王者荣耀,发现其实MOBA游戏后台实现方式还是比较五花八门的,每个公司各显神通.&lt;/p&gt;
-&lt;p&gt;天美的做法是帧同步,不同于以前war3的那种典型的lockstep,走的应该还是CS架构,所有的客户端上传命令,服务器负责转发,他们给五个客户端分配不同的随机算子&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="游戏开发" scheme="http://cnhao.com/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
     <title>是啊,so why game?</title>
     <link href="http://cnhao.com/2017/12/27/whygame/"/>
     <id>http://cnhao.com/2017/12/27/whygame/</id>
     <published>2017-12-27T13:31:09.000Z</published>
-    <updated>2017-12-27T15:07:58.230Z</updated>
+    <updated>2017-12-28T18:31:37.897Z</updated>
     
     <content type="html">&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/zhizi.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;作为一个随心所欲的码农摄影师,我决定从这篇以后,包括以前能加上我拍的照片的都给加上,别太违和就行.&lt;/p&gt;
@@ -105,18 +59,18 @@
     </summary>
     
     
-      <category term="游戏开发" scheme="http://cnhao.com/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    
       <category term="随笔" scheme="http://cnhao.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="游戏开发" scheme="http://cnhao.com/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>vector动态扩容</title>
-    <link href="http://cnhao.com/2017/12/27/vector/"/>
-    <id>http://cnhao.com/2017/12/27/vector/</id>
-    <published>2017-12-27T11:28:59.000Z</published>
-    <updated>2017-12-27T13:17:28.245Z</updated>
+    <link href="http://cnhao.com/2017/11/27/vector/"/>
+    <id>http://cnhao.com/2017/11/27/vector/</id>
+    <published>2017-11-27T11:28:59.000Z</published>
+    <updated>2017-12-28T18:28:05.098Z</updated>
     
     <content type="html">&lt;p&gt;比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReallocBuffer(&lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;::max(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*mBitCapacity,nextBitHead);)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;所以为什么系数是2呢.&lt;br&gt;很简单,跟着&lt;code&gt;std::vector&lt;/code&gt;学的.&lt;/p&gt;
@@ -154,10 +108,10 @@
   
   <entry>
     <title>内存对齐与游戏开发之比特流数据传输</title>
-    <link href="http://cnhao.com/2017/11/27/struct/"/>
-    <id>http://cnhao.com/2017/11/27/struct/</id>
-    <published>2017-11-27T05:12:29.000Z</published>
-    <updated>2017-12-27T13:17:46.527Z</updated>
+    <link href="http://cnhao.com/2017/11/15/struct/"/>
+    <id>http://cnhao.com/2017/11/15/struct/</id>
+    <published>2017-11-15T05:12:29.000Z</published>
+    <updated>2017-12-28T18:28:06.430Z</updated>
     
     <content type="html">&lt;p&gt;网上写的五花八门的快餐式教程和规则嵌套毫无灵魂.&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -321,18 +275,64 @@
     </summary>
     
     
+      <category term="C++" scheme="http://cnhao.com/tags/C/"/>
+    
       <category term="游戏开发" scheme="http://cnhao.com/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
     
-      <category term="C++" scheme="http://cnhao.com/tags/C/"/>
+  </entry>
+  
+  <entry>
+    <title>客户端重放与航位预测</title>
+    <link href="http://cnhao.com/2017/11/05/delay/"/>
+    <id>http://cnhao.com/2017/11/05/delay/</id>
+    <published>2017-11-05T12:30:04.000Z</published>
+    <updated>2017-12-28T18:31:19.914Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/chezhan.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;为了年前能找个游戏后台的工作,最近一直在学习相关知识.&lt;br&gt;因为没有需求只能自己给自己提需求.&lt;/p&gt;
+&lt;p&gt;首先假设我们在做的是一款移动射击游戏,后台开发这点比较好,比较友好的屏蔽了2D或者3D,arpg还是mmo,虽然我也想做那些,但是和我工作跨度太大,那些只能先进门后再修行了.心中对那个光影的世界还是有梦的好吧.&lt;/p&gt;
+&lt;p&gt;之前有关注了一段时间王者荣耀,发现其实MOBA游戏后台实现方式还是比较五花八门的,每个公司各显神通.&lt;/p&gt;
+&lt;p&gt;天美的做法是帧同步,不同于以前war3的那种典型的lockstep,走的应该还是CS架构,所有的客户端上传命令,服务器负责转发,他们给五个客户端分配不同的随机算子&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;,这样五个客户端就像五个播放器,逐帧的去播放指令就好,但是指令肯定不是逐帧到达的,所以是插值播放动画,服务器会检查一致性,排查异常原因.&lt;/p&gt;
+&lt;p&gt;这样的话游戏大体分为三个层,一个就是最上层,你手指头按的到的真实的游戏,一层是游戏数据运算,普攻,甩技能的计算判定等等,然后第三层就算是服务器.可以想到这样子的话制作回放和保存录像肯定是非常方便的,如果你卡了,你的包传不到服务器,服务器也不会转发你的包,在别人看来你就是不动,等你卡完了发现自己秒死,丢包的话他们的做法好像是增加冗余之类的方法,每次给这个客户端发包都带一些老包,也能指定重发一些确认丢失的关键帧,从缓存里直接按帧ID取出来发就行,很方便.但是如果掉线的话…应该就只能从头快进了.为什么研究研究着换方向了呢….这个话题就很悲伤了,我带applecare的亮黑7plus被偷了.然后从那晚起,我再也没玩过这个游戏.&lt;/p&gt;
+&lt;p&gt;转战射击游戏,CS,COD,守望先锋,H1Z1,当然还有现象级的PUBG..手游射击暂时不提,个人觉得fps游戏,怎么也得pc,没键盘鼠标蓝瘦啊,手游就玩玩适合手游的,moba有声有色,各种独立游戏,休闲小游戏,回合制肝游戏都很出彩,多多利用碎片化时间,吸钱网游就别装,可着劲儿努力好好吸一波,xbox的暗黑3就是比pc舒服很多,塞尔达+NS也是绝配不是么.各有各的好处,这里有点看不太懂网易游戏,也忒极端了,以前端游+代理也是有声有色的,错过了一波页游,当然可能是不屑,然后赶上一波手游,完全气质变了啊,我玩wow时候那个网易去哪儿了,现在感觉完全…不好描述&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;受不鸟了受不鸟了,我从未来穿越回来插播一条新闻,哈哈哈哈哈哈,网易来了个骚操作,荒野求生PC版全国首款端游吃鸡之手游模拟器,真鸡儿666,真的是想唱一首凉凉送给你….&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;与帧同步不同,考虑作弊情况还有特性,对每个客户端所见之间的同步没有对延迟以及手感的要求高,另外还有数据和带宽的问题,fps游戏一般多采用状态同步.也就是有一个权威服务器来做游戏模拟来最终唯一判定各个客户端的状态.&lt;/p&gt;
+&lt;p&gt;先不考虑ack和冗余,最简单的实现,你按w键想往前走,你的游戏每帧会处理游戏输入,于是你的w按键状态被记录,假设每秒以一定的频率采集一次input,然后(dirty状态+当前帧时间+两次采集的真实时间间隔),作为一个move包上传服务器,插一句,因为服务器和客户端的时钟可能不同,所以要上传自己的时间戳,这样来计算rtt才是相对准确的,客户端重放也要用到这个时间戳.服务器收到后异步的先把move消费出来放unProcessedPackets队列,逐帧模拟的时候消化队列,根据ip去找到正确的对象代理来模拟deltaTime的move,然后新的位置,速度,旋转回传.&lt;/p&gt;
+&lt;p&gt;这样有一个问题,当一个命令从客户端到服务器,再从服务器传回客户端执行,这经历了一个严重影响手感的rtt.&lt;/p&gt;
+&lt;p&gt;游戏里一切以服务器为准,那么显而易见你在游戏里看到的玩家的状态,比他们的服务器状态滞后了1/2个rtt,另外正常的游戏不可能花费好几帧不动来等服务器的包,都是插值模拟,假设从收到一个包,到顺滑的展现出这个包的动作需要的时间为ip,那么情况只会更糟,延迟为1/2*rtt+ip.但插值这个ip时间换来的是更加顺滑的操作体验,再加上摄像机可以由玩家自己移动,相比不插值还是要好很多.至少你不会大叫&lt;code&gt;卡卡卡&lt;/code&gt;,你可能会说&lt;code&gt;这游戏延迟有点高啊熊dei&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;解决方案就是预测他们的位置,在渲染他们之前,假定他们保持最新的包里的动作(方向,速度,旋转)不变,再模拟1/2个rtt,如果他们确实在下一个状态包到来的时候,之间状态没有变过,那么新的预测肯定是现在的位置一致.&lt;/p&gt;
+&lt;p&gt;如果不一致,譬如你看到的玩家停止奔跑开始设计,你拿到新的状态和位置后往前模拟,发现你的客户端展现的他的位置有偏差,就以服务器为准进行调整,注意,调整的位置依然向前模拟后的.&lt;/p&gt;
+&lt;p&gt;这对于非本地玩家很有效,但自己的游戏体验会很差.&lt;br&gt;因为无论你怎么做,怎么预测,你按下一个按钮,到收到反馈,至少都会经历一个rtt.&lt;/p&gt;
+&lt;p&gt;做法就是客户端重放.&lt;br&gt;当你按下按钮的时候,你本地就渲染这个动作,跟网络比起来,机器的延迟简直可以忽略了.核心就是保存客户端发出的move队列,当你收到了来自服务器的一个处理过的MoveList的时候,从list里取出mLastMoveTimestamp,和当前时钟时间比较算出rtt,然后去保存的move列表中删除在这个时间点以前的所有move.&lt;del&gt;关于ack和冗余来弥补UDP的缺点改天再换个地方说吧&lt;/del&gt;.&lt;/p&gt;
+&lt;p&gt;最后本地客户端,把收到的服务器的move都处理完,在这个基础上把本地movelist剩余的所有服务器未见的move,再模拟一遍.&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReadAndDo();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Simulate();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果服务器没有发生什么意外,那么执行后的结果应该与read之前完全一致.什么是意外呢.&lt;/p&gt;
+&lt;p&gt;譬如你正跑的欢,被98K一枪爆头.就像人生.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/chezhan.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;为了年前能找个游戏后台的工作,最近一直在学习相关知识.&lt;br&gt;因为没有需求只能自己给自己提需求.&lt;/p&gt;
+&lt;p&gt;首先假设我们在做的是一款移动射击游戏,后台开发这点比较好,比较友好的屏蔽了2D或者3D,arpg还是mmo,虽然我也想做那些,但是和我工作跨度太大,那些只能先进门后再修行了.心中对那个光影的世界还是有梦的好吧.&lt;/p&gt;
+&lt;p&gt;之前有关注了一段时间王者荣耀,发现其实MOBA游戏后台实现方式还是比较五花八门的,每个公司各显神通.&lt;/p&gt;
+&lt;p&gt;天美的做法是帧同步,不同于以前war3的那种典型的lockstep,走的应该还是CS架构,所有的客户端上传命令,服务器负责转发,他们给五个客户端分配不同的随机算子&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="游戏开发" scheme="http://cnhao.com/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>所以为什么要用齐次坐标呢?</title>
-    <link href="http://cnhao.com/2017/03/20/4d/"/>
-    <id>http://cnhao.com/2017/03/20/4d/</id>
-    <published>2017-03-20T13:52:52.000Z</published>
-    <updated>2017-12-27T13:18:44.762Z</updated>
+    <link href="http://cnhao.com/2017/10/20/4d/"/>
+    <id>http://cnhao.com/2017/10/20/4d/</id>
+    <published>2017-10-20T13:52:52.000Z</published>
+    <updated>2017-12-28T18:30:26.629Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;出于某种原因,我们在这里使用四维矩阵&lt;/p&gt;
@@ -377,10 +377,10 @@
   
   <entry>
     <title>Relax</title>
-    <link href="http://cnhao.com/2017/03/20/bus/"/>
-    <id>http://cnhao.com/2017/03/20/bus/</id>
-    <published>2017-03-20T08:58:23.000Z</published>
-    <updated>2017-12-28T16:52:51.698Z</updated>
+    <link href="http://cnhao.com/2017/09/20/bus/"/>
+    <id>http://cnhao.com/2017/09/20/bus/</id>
+    <published>2017-09-20T12:58:23.000Z</published>
+    <updated>2017-12-28T18:30:44.660Z</updated>
     
     <content type="html">&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/bus.png&quot; alt=&quot;bus&quot;&gt;&lt;/p&gt;
 &lt;p&gt;最近大脑处于异常疲惫状态 &lt;del&gt;整天从早被操到晚啊,我累的天呐撸😭&lt;/del&gt;&lt;br&gt;&lt;!--
@@ -420,6 +420,100 @@
     
     
       <category term="随笔" scheme="http://cnhao.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>通俗易懂之移动语义与完美转发</title>
+    <link href="http://cnhao.com/2017/07/20/moveforward/"/>
+    <id>http://cnhao.com/2017/07/20/moveforward/</id>
+    <published>2017-07-20T12:41:59.000Z</published>
+    <updated>2017-12-28T18:29:54.118Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;移动语义&quot;&gt;&lt;a href=&quot;#移动语义&quot; class=&quot;headerlink&quot; title=&quot;移动语义&quot;&gt;&lt;/a&gt;移动语义&lt;/h1&gt;&lt;p&gt;&lt;del&gt;关于左右值得问题看我另一篇文章&lt;/del&gt;.&lt;/p&gt;
+&lt;p&gt;移动语义是一种语义.被用来&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;对右值充分利用提高效率&lt;/p&gt;
+&lt;p&gt;譬如移动构造函数等.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2017/12/27/5a43960f03869.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;典型应用&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;template &amp;lt;class T&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;void swap(T &amp;amp;a, T &amp;amp;b)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    T tmp(std::move(a));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    a = std::move(b);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    b = std::move(tmp);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&quot;move-amp-amp-forward&quot;&gt;&lt;a href=&quot;#move-amp-amp-forward&quot; class=&quot;headerlink&quot; title=&quot;move &amp;amp;&amp;amp; forward&quot;&gt;&lt;/a&gt;move &amp;amp;&amp;amp; forward&lt;/h1&gt;&lt;p&gt;move函数把左值转为右值引用,此值生命周期并未结束.&lt;/p&gt;
+&lt;p&gt;基本等同于&lt;code&gt;static_cast&amp;lt;T&amp;amp;&amp;amp;&amp;gt;(lvalue);&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在C++11中，拷贝构造/赋值和移动构造/赋值函数必须同时提供，或者同时不提供。只有移动语义表明该类型的变量所拥有的资源只能被移动，而不能被拷贝。那么这样的资源必须是唯一的，因此只有移动语义的类型往往都是“资源型”的类型，如智能指针、文件流等.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;你想到了什么.我脑子里蹦出来的典型就是&lt;code&gt;unique_ptr&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;forward&lt;/code&gt;下面说&lt;/p&gt;
+&lt;h1 id=&quot;完美转发&quot;&gt;&lt;a href=&quot;#完美转发&quot; class=&quot;headerlink&quot; title=&quot;完美转发&quot;&gt;&lt;/a&gt;完美转发&lt;/h1&gt;&lt;p&gt;如果我要实现一个函数可能有四种参数类型&lt;/p&gt;
+&lt;p&gt;左值,const 左值&lt;/p&gt;
+&lt;p&gt;右值,const右值&lt;/p&gt;
+&lt;p&gt;怎么写,很简单写四个,静态多态.&lt;/p&gt;
+&lt;p&gt;不过有了forward就不需要了.&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;meta-string&quot;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;executeCode&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp; m)&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot;lvalue ref.&quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;executeCode&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp;&amp;amp; m)&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot;rvalue ref.&quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;executeCode&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp; m)&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot;const lvalue ref.&quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;executeCode&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp;&amp;amp; m)&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot;const rvalue ref.&quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;template&lt;/span&gt; &amp;lt;&lt;span class=&quot;keyword&quot;&gt;typename&lt;/span&gt; T&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;perfectForward&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(T &amp;amp;&amp;amp; t)&lt;/span&gt; &lt;/span&gt;&amp;#123; executeCode(forward&amp;lt;T&amp;gt;(t)); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; a;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; b;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; c = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; d = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    perfectForward(a);          &lt;span class=&quot;comment&quot;&gt;// lvalue ref&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    perfectForward(move(b));    &lt;span class=&quot;comment&quot;&gt;// rvalue ref&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    perfectForward(c);          &lt;span class=&quot;comment&quot;&gt;// const lvalue ref&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    perfectForward(move(d));    &lt;span class=&quot;comment&quot;&gt;// const rvalue ref&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;output:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;lvalue ref.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rvalue ref.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;const lvalue ref.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;const rvalue ref.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;清晰明了.&lt;br&gt;那么问题来了,如果&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;perfectForward&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(T &amp;amp;&amp;amp; t)&lt;/span&gt; &lt;/span&gt;&amp;#123; executeCode(forward&amp;lt;T&amp;gt;(t)); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//改为&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;perfectForward&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(T &amp;amp;&amp;amp; t)&lt;/span&gt; &lt;/span&gt;&amp;#123; executeCode(t); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;答对有奖.债见.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;移动语义&quot;&gt;&lt;a href=&quot;#移动语义&quot; class=&quot;headerlink&quot; title=&quot;移动语义&quot;&gt;&lt;/a&gt;移动语义&lt;/h1&gt;&lt;p&gt;&lt;del&gt;关于左右值得问题看我另一篇文章&lt;/del&gt;.&lt;/p&gt;
+&lt;p&gt;移动语义是一种语义.被用来&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://cnhao.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我理解中的左值,右值和引用</title>
+    <link href="http://cnhao.com/2017/07/11/%E6%88%91%E7%90%86%E8%A7%A3%E4%B8%AD%E7%9A%84%E5%B7%A6%E5%80%BC-%E5%8F%B3%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/"/>
+    <id>http://cnhao.com/2017/07/11/我理解中的左值-右值和引用/</id>
+    <published>2017-07-11T05:40:28.000Z</published>
+    <updated>2017-12-28T18:29:55.344Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;具名的,可取址的称为左值&lt;/li&gt;
+&lt;li&gt;表达式,字面常量 &lt;code&gt;&amp;quot;abc&amp;quot;,2,true&lt;/code&gt;为纯右值&lt;/li&gt;
+&lt;li&gt;函数返回值,lambda表达式等为将亡值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无论是左值引用还是右值引用,都必须在立即初始化.因为他们并不拥有绑定对象的内存空间只是一个别名.&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;右值引用&quot;&gt;&lt;a href=&quot;#右值引用&quot; class=&quot;headerlink&quot; title=&quot;右值引用&quot;&gt;&lt;/a&gt;右值引用&lt;/h1&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T &amp;amp;&amp;amp; a = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T b = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;函数&lt;code&gt;ReturnRvalue()&lt;/code&gt;返回一个临时变量(&lt;strong&gt;将亡值&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;下面的b是常用的做法,把临时变量赋值给b,&lt;code&gt;ReturnRvalue()&lt;/code&gt;的生命周期在本行被执行后终结.&lt;/p&gt;
+&lt;p&gt;上面的a是右值引用,他绑定了临时变量,因为临时变量并不会再语句结束后死去,只要a活着,他就不会死.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;值得注意的是,如果函数的返回值是一个类的对象,那么当另一个函数直接调用此函数返回值时,如果是值引用会调用拷贝构造和析构函数.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;万能引用-常量左值引用&quot;&gt;&lt;a href=&quot;#万能引用-常量左值引用&quot; class=&quot;headerlink&quot; title=&quot;万能引用(常量左值引用)&quot;&gt;&lt;/a&gt;万能引用(常量左值引用)&lt;/h1&gt;&lt;p&gt;常量左值引用被称为万能引用,&lt;strong&gt;我猜是因为&lt;/strong&gt;因为他打破了左值引用不可以绑定右值的传说.&lt;/p&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T &amp;amp; e = ReturnRvalue(); &lt;span class=&quot;comment&quot;&gt;//传说,编译错误&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; T &amp;amp; f = ReturnRvalue(); &lt;span class=&quot;comment&quot;&gt;//打破了,一切正常&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt; &amp;amp; judgement = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//同上&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt; judgement = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//注意和第三行的区别哦&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;常量左值引用是只读的!!!!&lt;/p&gt;
+&lt;p&gt;目的是为了减少各种开销,内存,复制,拷贝构造,析构等.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;TIPS&quot;&gt;&lt;a href=&quot;#TIPS&quot; class=&quot;headerlink&quot; title=&quot;TIPS&quot;&gt;&lt;/a&gt;TIPS&lt;/h1&gt;&lt;p&gt;左值引用不可以绑定右值,下面是错误的&lt;br&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; c;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp;&amp;amp; d = c;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;非常量左值只能接受非常量左值对其进行初始化。&lt;/p&gt;
+&lt;p&gt;标准库在 &lt;code&gt;&amp;lt;type_traits&amp;gt;&lt;/code&gt; &lt;code&gt;头文件中提供了3个模板类：is_rvalue_reference&lt;/code&gt;,&lt;code&gt;is_lvalue_reference&lt;/code&gt;,&lt;code&gt;is_reference&lt;/code&gt;,可供我们进行判断。比如:&lt;/p&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; is_rvalue_reference&amp;lt;&lt;span class=&quot;built_in&quot;&gt;string&lt;/span&gt; &amp;amp;&amp;amp;&amp;gt;::value;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;hr&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://cnhao.com/tags/C/"/>
     
   </entry>
   
@@ -473,51 +567,6 @@
     
     
       <category term="算法" scheme="http://cnhao.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>通俗易懂之移动语义与完美转发</title>
-    <link href="http://cnhao.com/2016/09/02/moveforward/"/>
-    <id>http://cnhao.com/2016/09/02/moveforward/</id>
-    <published>2016-09-02T12:41:59.000Z</published>
-    <updated>2017-12-27T13:17:30.221Z</updated>
-    
-    <content type="html">&lt;h1 id=&quot;移动语义&quot;&gt;&lt;a href=&quot;#移动语义&quot; class=&quot;headerlink&quot; title=&quot;移动语义&quot;&gt;&lt;/a&gt;移动语义&lt;/h1&gt;&lt;p&gt;&lt;del&gt;关于左右值得问题看我另一篇文章&lt;/del&gt;.&lt;/p&gt;
-&lt;p&gt;移动语义是一种语义.被用来&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;对右值充分利用提高效率&lt;/p&gt;
-&lt;p&gt;譬如移动构造函数等.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2017/12/27/5a43960f03869.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;典型应用&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;template &amp;lt;class T&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;void swap(T &amp;amp;a, T &amp;amp;b)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    T tmp(std::move(a));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    a = std::move(b);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    b = std::move(tmp);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h1 id=&quot;move-amp-amp-forward&quot;&gt;&lt;a href=&quot;#move-amp-amp-forward&quot; class=&quot;headerlink&quot; title=&quot;move &amp;amp;&amp;amp; forward&quot;&gt;&lt;/a&gt;move &amp;amp;&amp;amp; forward&lt;/h1&gt;&lt;p&gt;move函数把左值转为右值引用,此值生命周期并未结束.&lt;/p&gt;
-&lt;p&gt;基本等同于&lt;code&gt;static_cast&amp;lt;T&amp;amp;&amp;amp;&amp;gt;(lvalue);&lt;/code&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在C++11中，拷贝构造/赋值和移动构造/赋值函数必须同时提供，或者同时不提供。只有移动语义表明该类型的变量所拥有的资源只能被移动，而不能被拷贝。那么这样的资源必须是唯一的，因此只有移动语义的类型往往都是“资源型”的类型，如智能指针、文件流等.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;你想到了什么.我脑子里蹦出来的典型就是&lt;code&gt;unique_ptr&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;forward&lt;/code&gt;下面说&lt;/p&gt;
-&lt;h1 id=&quot;完美转发&quot;&gt;&lt;a href=&quot;#完美转发&quot; class=&quot;headerlink&quot; title=&quot;完美转发&quot;&gt;&lt;/a&gt;完美转发&lt;/h1&gt;&lt;p&gt;如果我要实现一个函数可能有四种参数类型&lt;/p&gt;
-&lt;p&gt;左值,const 左值&lt;/p&gt;
-&lt;p&gt;右值,const右值&lt;/p&gt;
-&lt;p&gt;怎么写,很简单写四个,静态多态.&lt;/p&gt;
-&lt;p&gt;不过有了forward就不需要了.&lt;/p&gt;
-&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;meta-string&quot;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;executeCode&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp; m)&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot;lvalue ref.&quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;executeCode&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp;&amp;amp; m)&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot;rvalue ref.&quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;executeCode&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp; m)&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot;const lvalue ref.&quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;executeCode&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp;&amp;amp; m)&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot;const rvalue ref.&quot;&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;built_in&quot;&gt;endl&lt;/span&gt;; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;template&lt;/span&gt; &amp;lt;&lt;span class=&quot;keyword&quot;&gt;typename&lt;/span&gt; T&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;perfectForward&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(T &amp;amp;&amp;amp; t)&lt;/span&gt; &lt;/span&gt;&amp;#123; executeCode(forward&amp;lt;T&amp;gt;(t)); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; a;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; b;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; c = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; d = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    perfectForward(a);          &lt;span class=&quot;comment&quot;&gt;// lvalue ref&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    perfectForward(move(b));    &lt;span class=&quot;comment&quot;&gt;// rvalue ref&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    perfectForward(c);          &lt;span class=&quot;comment&quot;&gt;// const lvalue ref&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    perfectForward(move(d));    &lt;span class=&quot;comment&quot;&gt;// const rvalue ref&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;output:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;lvalue ref.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rvalue ref.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;const lvalue ref.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;const rvalue ref.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;清晰明了.&lt;br&gt;那么问题来了,如果&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;perfectForward&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(T &amp;amp;&amp;amp; t)&lt;/span&gt; &lt;/span&gt;&amp;#123; executeCode(forward&amp;lt;T&amp;gt;(t)); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//改为&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;perfectForward&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(T &amp;amp;&amp;amp; t)&lt;/span&gt; &lt;/span&gt;&amp;#123; executeCode(t); &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;答对有奖.债见.&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;移动语义&quot;&gt;&lt;a href=&quot;#移动语义&quot; class=&quot;headerlink&quot; title=&quot;移动语义&quot;&gt;&lt;/a&gt;移动语义&lt;/h1&gt;&lt;p&gt;&lt;del&gt;关于左右值得问题看我另一篇文章&lt;/del&gt;.&lt;/p&gt;
-&lt;p&gt;移动语义是一种语义.被用来&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://cnhao.com/tags/C/"/>
     
   </entry>
   
@@ -709,55 +758,6 @@
     
     
       <category term="广告引擎" scheme="http://cnhao.com/tags/%E5%B9%BF%E5%91%8A%E5%BC%95%E6%93%8E/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我理解中的左值,右值和引用</title>
-    <link href="http://cnhao.com/2016/08/11/%E6%88%91%E7%90%86%E8%A7%A3%E4%B8%AD%E7%9A%84%E5%B7%A6%E5%80%BC-%E5%8F%B3%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/"/>
-    <id>http://cnhao.com/2016/08/11/我理解中的左值-右值和引用/</id>
-    <published>2016-08-11T05:40:28.000Z</published>
-    <updated>2017-12-27T13:18:35.363Z</updated>
-    
-    <content type="html">&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;具名的,可取址的称为左值&lt;/li&gt;
-&lt;li&gt;表达式,字面常量 &lt;code&gt;&amp;quot;abc&amp;quot;,2,true&lt;/code&gt;为纯右值&lt;/li&gt;
-&lt;li&gt;函数返回值,lambda表达式等为将亡值&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;无论是左值引用还是右值引用,都必须在立即初始化.因为他们并不拥有绑定对象的内存空间只是一个别名.&lt;/strong&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id=&quot;右值引用&quot;&gt;&lt;a href=&quot;#右值引用&quot; class=&quot;headerlink&quot; title=&quot;右值引用&quot;&gt;&lt;/a&gt;右值引用&lt;/h1&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T &amp;amp;&amp;amp; a = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T b = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;函数&lt;code&gt;ReturnRvalue()&lt;/code&gt;返回一个临时变量(&lt;strong&gt;将亡值&lt;/strong&gt;).&lt;/p&gt;
-&lt;p&gt;下面的b是常用的做法,把临时变量赋值给b,&lt;code&gt;ReturnRvalue()&lt;/code&gt;的生命周期在本行被执行后终结.&lt;/p&gt;
-&lt;p&gt;上面的a是右值引用,他绑定了临时变量,因为临时变量并不会再语句结束后死去,只要a活着,他就不会死.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;值得注意的是,如果函数的返回值是一个类的对象,那么当另一个函数直接调用此函数返回值时,如果是值引用会调用拷贝构造和析构函数.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id=&quot;万能引用-常量左值引用&quot;&gt;&lt;a href=&quot;#万能引用-常量左值引用&quot; class=&quot;headerlink&quot; title=&quot;万能引用(常量左值引用)&quot;&gt;&lt;/a&gt;万能引用(常量左值引用)&lt;/h1&gt;&lt;p&gt;常量左值引用被称为万能引用,&lt;strong&gt;我猜是因为&lt;/strong&gt;因为他打破了左值引用不可以绑定右值的传说.&lt;/p&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T &amp;amp; e = ReturnRvalue(); &lt;span class=&quot;comment&quot;&gt;//传说,编译错误&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; T &amp;amp; f = ReturnRvalue(); &lt;span class=&quot;comment&quot;&gt;//打破了,一切正常&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt; &amp;amp; judgement = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//同上&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt; judgement = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//注意和第三行的区别哦&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;常量左值引用是只读的!!!!&lt;/p&gt;
-&lt;p&gt;目的是为了减少各种开销,内存,复制,拷贝构造,析构等.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id=&quot;TIPS&quot;&gt;&lt;a href=&quot;#TIPS&quot; class=&quot;headerlink&quot; title=&quot;TIPS&quot;&gt;&lt;/a&gt;TIPS&lt;/h1&gt;&lt;p&gt;左值引用不可以绑定右值,下面是错误的&lt;br&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; c;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &amp;amp;&amp;amp; d = c;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;非常量左值只能接受非常量左值对其进行初始化。&lt;/p&gt;
-&lt;p&gt;标准库在 &lt;code&gt;&amp;lt;type_traits&amp;gt;&lt;/code&gt; &lt;code&gt;头文件中提供了3个模板类：is_rvalue_reference&lt;/code&gt;,&lt;code&gt;is_lvalue_reference&lt;/code&gt;,&lt;code&gt;is_reference&lt;/code&gt;,可供我们进行判断。比如:&lt;/p&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cout&lt;/span&gt; &amp;lt;&amp;lt; is_rvalue_reference&amp;lt;&lt;span class=&quot;built_in&quot;&gt;string&lt;/span&gt; &amp;amp;&amp;amp;&amp;gt;::value;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;hr&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://cnhao.com/tags/C/"/>
     
   </entry>
   

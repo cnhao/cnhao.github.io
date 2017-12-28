@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="图形学," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -95,27 +95,25 @@
 
 
 
-<meta name="description" content="出于某种原因,我们在这里使用四维矩阵
-
-最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.
-也就是说为啥不这样搞,如下图">
+<meta name="description" content="比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.1ReallocBuffer(std::max(2*mBitCapacity,nextBitHead);)
+所以为什么系数是2呢.很简单,跟着std::vector学的.
+我们看一下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="所以为什么要用齐次坐标呢?">
-<meta property="og:url" content="http://cnhao.com/2017/03/20/4d/index.html">
+<meta property="og:title" content="vector动态扩容">
+<meta property="og:url" content="http://cnhao.com/2017/11/27/vector/index.html">
 <meta property="og:site_name" content="艾泽拉斯">
-<meta property="og:description" content="出于某种原因,我们在这里使用四维矩阵
-
-最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.
-也就是说为啥不这样搞,如下图">
-<meta property="og:image" content="http://o6ymgz5vj.bkt.clouddn.com/axb.png">
-<meta property="og:updated_time" content="2017-12-27T13:18:44.762Z">
+<meta property="og:description" content="比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.1ReallocBuffer(std::max(2*mBitCapacity,nextBitHead);)
+所以为什么系数是2呢.很简单,跟着std::vector学的.
+我们看一下">
+<meta property="og:image" content="https://i.loli.net/2017/12/27/5a438682e30ab.jpg">
+<meta property="og:image" content="https://i.loli.net/2017/12/27/5a4386d71de3c.jpg">
+<meta property="og:updated_time" content="2017-12-28T18:28:05.098Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="所以为什么要用齐次坐标呢?">
-<meta name="twitter:description" content="出于某种原因,我们在这里使用四维矩阵
-
-最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.
-也就是说为啥不这样搞,如下图">
-<meta name="twitter:image" content="http://o6ymgz5vj.bkt.clouddn.com/axb.png">
+<meta name="twitter:title" content="vector动态扩容">
+<meta name="twitter:description" content="比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.1ReallocBuffer(std::max(2*mBitCapacity,nextBitHead);)
+所以为什么系数是2呢.很简单,跟着std::vector学的.
+我们看一下">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/27/5a438682e30ab.jpg">
 
 
 
@@ -143,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://cnhao.com/2017/03/20/4d/"/>
+  <link rel="canonical" href="http://cnhao.com/2017/11/27/vector/"/>
 
 
 
 
 
-  <title>所以为什么要用齐次坐标呢? | 艾泽拉斯</title>
+  <title>vector动态扩容 | 艾泽拉斯</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +267,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cnhao.com/2017/03/20/4d/">
+    <link itemprop="mainEntityOfPage" href="http://cnhao.com/2017/11/27/vector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cnhao">
@@ -286,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">所以为什么要用齐次坐标呢?</h1>
+          <h1 class="post-title" itemprop="name headline">vector动态扩容</h1>
         
 
         <div class="post-meta">
@@ -298,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T21:52:52+08:00">
-                2017-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T19:28:59+08:00">
+                2017-11-27
               </time>
             
 
@@ -333,30 +331,25 @@
       
 
       
-        <blockquote>
-<p>出于某种原因,我们在这里使用四维矩阵</p>
-</blockquote>
-<p>最早看到这个奇怪的论调是在openGL的教程里.第一次学的时候急着让我的箱子转起来,没考虑那么多.后来系统的复习图形学,开始探究这么问题.</p>
-<p>也就是说为啥不这样搞,如下图</p>
+        <p>比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReallocBuffer(<span class="built_in">std</span>::max(<span class="number">2</span>*mBitCapacity,nextBitHead);)</span><br></pre></td></tr></table></figure></p>
+<p>所以为什么系数是2呢.<br>很简单,跟着<code>std::vector</code>学的.</p>
+<p>我们看一下</p>
 <a id="more"></a>
-<p><img src="http://o6ymgz5vj.bkt.clouddn.com/axb.png" alt="ax=b"></p>
-<p>首先现代的图形sdk都是可编程管线的,你是怎么变化的是自己写进shader里面的.</p>
-<p>说法有很多,我大概回忆下各种说法.</p>
-<ol>
-<li>矩阵描述的是运动,这里的四维矩阵不是用来描述三维空间坐标和向量的,是描述运动的.</li>
-<li>是仿射空间不是三维空间</li>
-<li>如果变换矩阵使用三维的,就无法描述带有平移的运动.</li>
-<li>同上,如果要用三维矩阵描述平移,需要ax后面加个b,ax+b</li>
-<li>如果用三维矩阵表示三维空间的运动,那说到底都是在以原点为中心绕圈圈啊,我感觉这个说法对于我这样的菜鸟最好理解ax+by+cz=0与ax+by+cz+d=0的区别啊.一目了然.</li>
-</ol>
-<p>都对好吧,没毛病,老铁.</p>
-<p>完备知识体系之神<strong>Milo Yip</strong>认为:<del>是的是的,这个称号是我封的</del></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::size_type tmp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">1</span>; i &lt; <span class="number">10000000</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        v.push_back(i);</span><br><span class="line">        <span class="keyword">if</span> (v.capacity() != tmp)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; j &lt;&lt; <span class="string">" "</span> &lt;&lt; v.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            tmp = v.capacity();</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">1 1</span><br><span class="line">2 2</span><br><span class="line">3 4</span><br><span class="line">4 8</span><br><span class="line">5 16</span><br><span class="line">6 32</span><br><span class="line">7 64</span><br><span class="line">8 128</span><br><span class="line">9 256</span><br><span class="line">10 512</span><br><span class="line">11 1024</span><br><span class="line">12 2048</span><br><span class="line">13 4096</span><br><span class="line">14 8192</span><br><span class="line">15 16384</span><br><span class="line">16 32768</span><br><span class="line">17 65536</span><br><span class="line">18 131072</span><br><span class="line">19 262144</span><br><span class="line">20 524288</span><br><span class="line">21 1048576</span><br><span class="line">22 2097152</span><br><span class="line">23 4194304</span><br><span class="line">24 8388608</span><br><span class="line">25 16777216</span><br></pre></td></tr></table></figure></p>
+<p>所以为什么是2,2好不好.😆<br>其实并不好.</p>
 <blockquote>
-<p>仿射空间确实可以通过ax+b来实现,但是对于透视投影会用到齐次坐标.</p>
+<p><a href="https://github.com/facebook/folly/blob/master/folly/docs/FBVector.md" target="_blank" rel="external">facebook/folly</a></p>
+<p>Despite other compilers reducing the growth factor to 1.5, gcc has staunchly maintained its factor of 2. This makes std::vector cache- unfriendly and memory manager unfriendly.</p>
 </blockquote>
-<p>这些话我都是用自己的话又翻译的..这样方便一点.我是这么理解他的话的,所谓的透视投影对于变换矩阵的要求简单来讲就是需要平移和缩放,就像一个更大或者更小的相似三角形.</p>
-<p>归纳一下:<br>如果用四维矩阵,也就是三维空间的齐次坐标来表示变化.就可以让缩放,平移,旋转,透视等变换在一个矩阵里实现(<strong>矩阵乘法结合律</strong>).<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WVP = Projection * View * Translation * Rotation * Scale</span><br></pre></td></tr></table></figure></p>
-<p>openGL的方式,从右往左,向量在最右边.然后ax得到结果.在三维空间中,描述一个点的话w分量一般约定为1,描述一个向量的一般约定为0.毕竟1-1=0.没毛病吧.</p>
+<p>是时候又祭出了鹅厂总监Milo Yip…这大哥真是神一样的存在.经常在我困惑的时候搜到他的解释,这不能怪我抄袭,这本身也就是学习的一种方式嘛,向强者学习,就像看各种大师的书,信手拈来各种看起来很正常的做法,但其实如果面对空白让我来选择,可能抓破头也想不到那样做.经常会感觉,我擦,这好巧妙啊,这拿出来都不敢说..可是.这不就是学习么.又跑题了</p>
+<p><img src="https://i.loli.net/2017/12/27/5a438682e30ab.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2017/12/27/5a4386d71de3c.jpg" alt=""></p>
+<p>这里面也有几个问题就是所谓的<code>cache-unfriendly</code></p>
+<p>连续不断的申请新的内存,cache难以命中这没问题.<br>但是为什么我按1.5倍申请就缓存友好了呢.<br>如果有合适的机会重新回收内存再分配,内存地址有变化,但是地址范围并没有超过缓存的覆盖.</p>
+<blockquote>
+<p>改变数据是不会令缓存失效的，缓存失效是因为要访问一些不在缓存里的内存地址。</p>
+</blockquote>
 
       
     </div>
@@ -386,7 +379,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/图形学/" rel="tag"># 图形学</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -399,8 +392,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/20/bus/" rel="next" title="Relax">
-                <i class="fa fa-chevron-left"></i> Relax
+              <a href="/2017/11/15/struct/" rel="next" title="内存对齐与游戏开发之比特流数据传输">
+                <i class="fa fa-chevron-left"></i> 内存对齐与游戏开发之比特流数据传输
               </a>
             
           </div>
@@ -409,8 +402,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/27/struct/" rel="prev" title="内存对齐与游戏开发之比特流数据传输">
-                内存对齐与游戏开发之比特流数据传输 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/27/whygame/" rel="prev" title="是啊,so why game?">
+                是啊,so why game? <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
