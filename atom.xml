@@ -108,10 +108,10 @@
   
   <entry>
     <title>内存对齐与游戏开发之比特流数据传输</title>
-    <link href="http://cnhao.com/2017/11/15/struct/"/>
-    <id>http://cnhao.com/2017/11/15/struct/</id>
+    <link href="http://cnhao.com/2017/11/15/bitstream/"/>
+    <id>http://cnhao.com/2017/11/15/bitstream/</id>
     <published>2017-11-15T05:12:29.000Z</published>
-    <updated>2017-12-28T18:39:03.507Z</updated>
+    <updated>2017-12-28T18:48:02.701Z</updated>
     
     <content type="html">&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/chuizi.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;网上写的五花八门的快餐式教程和规则嵌套毫无灵魂.&lt;/p&gt;
@@ -287,9 +287,9 @@
     </summary>
     
     
-      <category term="游戏开发" scheme="http://cnhao.com/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    
       <category term="C++" scheme="http://cnhao.com/tags/C/"/>
+    
+      <category term="游戏开发" scheme="http://cnhao.com/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
