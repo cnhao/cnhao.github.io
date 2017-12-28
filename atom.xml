@@ -70,9 +70,10 @@
     <link href="http://cnhao.com/2017/11/27/vector/"/>
     <id>http://cnhao.com/2017/11/27/vector/</id>
     <published>2017-11-27T11:28:59.000Z</published>
-    <updated>2017-12-28T18:28:05.098Z</updated>
+    <updated>2017-12-28T18:54:45.393Z</updated>
     
-    <content type="html">&lt;p&gt;比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReallocBuffer(&lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;::max(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*mBitCapacity,nextBitHead);)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/shou.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReallocBuffer(&lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;::max(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*mBitCapacity,nextBitHead);)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;所以为什么系数是2呢.&lt;br&gt;很简单,跟着&lt;code&gt;std::vector&lt;/code&gt;学的.&lt;/p&gt;
 &lt;p&gt;我们看一下&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -95,7 +96,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReallocBuffer(&lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;::max(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*mBitCapacity,nextBitHead);)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/shou.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;比特流数据传输那篇文章,我们在buffer不够用的时候重新realloc了内存.&lt;br&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReallocBuffer(&lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;::max(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;*mBitCapacity,nextBitHead);)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;所以为什么系数是2呢.&lt;br&gt;很简单,跟着&lt;code&gt;std::vector&lt;/code&gt;学的.&lt;/p&gt;
 &lt;p&gt;我们看一下&lt;/p&gt;
     
