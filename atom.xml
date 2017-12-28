@@ -59,9 +59,9 @@
     </summary>
     
     
-      <category term="随笔" scheme="http://cnhao.com/tags/%E9%9A%8F%E7%AC%94/"/>
-    
       <category term="游戏开发" scheme="http://cnhao.com/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="随笔" scheme="http://cnhao.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
@@ -113,7 +113,7 @@
     <link href="http://cnhao.com/2017/11/13/delay/"/>
     <id>http://cnhao.com/2017/11/13/delay/</id>
     <published>2017-11-13T14:30:04.000Z</published>
-    <updated>2017-12-28T19:49:52.845Z</updated>
+    <updated>2017-12-28T20:03:28.800Z</updated>
     
     <content type="html">&lt;p&gt;&lt;img src=&quot;http://o6ymgz5vj.bkt.clouddn.com/chezhan.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;为了年前能找个游戏后台的工作,最近一直在学习相关知识.&lt;br&gt;因为没有需求只能自己给自己提需求.&lt;/p&gt;
@@ -127,16 +127,17 @@
 &lt;p&gt;&lt;em&gt;受不鸟了受不鸟了,我从未来穿越回来插播一条新闻,哈哈哈哈哈哈,网易来了个骚操作,荒野求生PC版全国首款端游吃鸡之手游模拟器,真鸡儿666,真的是想唱一首凉凉送给你….&lt;/em&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;与帧同步不同,考虑作弊情况还有特性,对每个客户端所见之间的同步没有对延迟以及手感的要求高,另外还有数据和带宽的问题,fps游戏一般多采用状态同步.也就是有一个权威服务器来做游戏模拟来最终唯一判定各个客户端的状态.&lt;/p&gt;
-&lt;p&gt;先不考虑ack和冗余,最简单的实现,你按w键想往前走,你的游戏每帧会处理游戏输入,于是你的w按键状态被记录,假设每秒以一定的频率采集一次input,然后(dirty状态+当前帧时间+两次采集的真实时间间隔),作为一个move包上传服务器,插一句,因为服务器和客户端的时钟可能不同,所以要上传自己的时间戳,这样来计算rtt才是相对准确的,客户端重放也要用到这个时间戳.服务器收到后异步的先把move消费出来放unProcessedPackets队列,逐帧模拟的时候消化队列,根据ip去找到正确的对象代理来模拟deltaTime的move,然后新的位置,速度,旋转回传.&lt;/p&gt;
+&lt;p&gt;先不考虑ack和冗余,最简单的实现,你按w键想往前走,你的游戏每帧会处理游戏输入,于是你的w按键状态被记录,假设每秒以一定的频率采集一次input,然后(dirty状态+当前帧时间+两次采集的真实时间间隔),作为一个move包上传服务器,插一句,因为服务器和客户端的时钟可能不同,所以要上传自己的时间戳,这样来计算rtt才是相对准确的,客户端重放也要用到这个时间戳.服务器收到后异步的先把move取出来放unProcessedPackets队列,逐帧模拟的时候消化队列,根据ip去找到正确的对象代理来模拟deltaTime的move,然后新的位置,速度,旋转等等具体游戏需要的细节回传.&lt;/p&gt;
 &lt;p&gt;这样有一个问题,当一个命令从客户端到服务器,再从服务器传回客户端执行,这经历了一个严重影响手感的rtt.&lt;/p&gt;
 &lt;p&gt;游戏里一切以服务器为准,那么显而易见你在游戏里看到的玩家的状态,比他们的服务器状态滞后了1/2个rtt,另外正常的游戏不可能花费好几帧不动来等服务器的包,都是插值模拟,假设从收到一个包,到顺滑的展现出这个包的动作需要的时间为ip,那么情况只会更糟,延迟为1/2*rtt+ip.但插值这个ip时间换来的是更加顺滑的操作体验,再加上摄像机可以由玩家自己移动,相比不插值还是要好很多.至少你不会大叫&lt;code&gt;卡卡卡&lt;/code&gt;,你可能会说&lt;code&gt;这游戏延迟有点高啊熊dei&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;解决方案就是预测他们的位置,在渲染他们之前,假定他们保持最新的包里的动作(方向,速度,旋转)不变,再模拟1/2个rtt,如果他们确实在下一个状态包到来的时候,之间状态没有变过,那么新的预测肯定是现在的位置一致.&lt;/p&gt;
-&lt;p&gt;如果不一致,譬如你看到的玩家停止奔跑开始设计,你拿到新的状态和位置后往前模拟,发现你的客户端展现的他的位置有偏差,就以服务器为准进行调整,注意,调整的位置依然向前模拟后的.&lt;/p&gt;
-&lt;p&gt;这对于非本地玩家很有效,但自己的游戏体验会很差.&lt;br&gt;因为无论你怎么做,怎么预测,你按下一个按钮,到收到反馈,至少都会经历一个rtt.&lt;/p&gt;
-&lt;p&gt;做法就是客户端重放.&lt;br&gt;当你按下按钮的时候,你本地就渲染这个动作,跟网络比起来,机器的延迟简直可以忽略了.核心就是保存客户端发出的move队列,当你收到了来自服务器的一个处理过的MoveList的时候,从list里取出mLastMoveTimestamp,和当前时钟时间比较算出rtt,然后去保存的move列表中删除在这个时间点以前的所有move.&lt;del&gt;关于ack和冗余来弥补UDP的缺点改天再换个地方说吧&lt;/del&gt;.&lt;/p&gt;
+&lt;p&gt;解决方案就是预测游戏对象的位置,在渲染,假定这些精灵保持(最新的包里的)动作(方向,速度,旋转)不变,再模拟1/2个rtt时间渲染出来,如果他们确实在下一个状态包到来的时候,之间状态确实没有变过,那么新的预测肯定与现在表现的位置一致,无需调整.&lt;/p&gt;
+&lt;p&gt;如果不一致,譬如你看到的玩家停止奔跑开始射击,你拿到新的状态后开始模拟,然后发现你的客户端展现的位置有偏差,就以服务器为准进行调整把他拉回来,绝地求生延迟这么大,各种飘逸,回退,走不动路捡不起抢太常见了,但是注意,调整的位置依然模拟后的.&lt;/p&gt;
+&lt;p&gt;这基本解决我们作为玩家的所见即所得(看见的就是服务器位置,可以对着他愉快的射击了),这对于非本地玩家很有效,但自己的游戏体验会很差.因为无论你怎么做,怎么预测,你按下一个按钮,到收到反馈,至少都会经历一个rtt.&lt;/p&gt;
+&lt;p&gt;解决方案就是客户端重放.&lt;br&gt;当你按下按钮的时候,你本地就渲染这个动作,跟网络比起来,机器的延迟简直可以忽略了.核心就是保存客户端发出的move队列,当你收到了来自服务器的一个处理过的MoveList的时候,从list里取出mLastMoveTimestamp,和当前时钟时间比较算出rtt,然后去保存的move列表中删除在这个时间点以前的所有move.&lt;del&gt;关于ack和冗余来弥补UDP的缺点改天再换个地方说吧&lt;/del&gt;.&lt;/p&gt;
 &lt;p&gt;最后本地客户端,把收到的服务器的move都处理完,在这个基础上把本地movelist剩余的所有服务器未见的move,再模拟一遍.&lt;/p&gt;
 &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ReadAndDo();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Simulate();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;如果服务器没有发生什么意外,那么执行后的结果应该与read之前完全一致.什么是意外呢.&lt;/p&gt;
+&lt;p&gt;如果服务器没有发生什么意外,那么执行后的结果应该与read之前完全一致,游戏体验也与单机无疑.&lt;/p&gt;
+&lt;p&gt;所以什么是意外呢.&lt;/p&gt;
 &lt;p&gt;譬如你正跑的欢,被98K一枪爆头.就像人生.&lt;/p&gt;
 </content>
     
