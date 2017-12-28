@@ -95,16 +95,43 @@
 
 
 
-<meta name="description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.">
+<meta name="description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.
+
+
+具名的,可取址的称为左值
+表达式,字面常量 &amp;quot;abc&amp;quot;,2,true为纯右值
+函数返回值,lambda表达式等为将亡值
+
+
+左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。
+无论是左值引用还是右值引用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我理解中的左值,右值和引用">
 <meta property="og:url" content="http://cnhao.com/2017/07/11/我理解中的左值-右值和引用/index.html">
 <meta property="og:site_name" content="艾泽拉斯">
-<meta property="og:description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.">
-<meta property="og:updated_time" content="2017-12-28T18:29:55.344Z">
+<meta property="og:description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.
+
+
+具名的,可取址的称为左值
+表达式,字面常量 &amp;quot;abc&amp;quot;,2,true为纯右值
+函数返回值,lambda表达式等为将亡值
+
+
+左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。
+无论是左值引用还是右值引用">
+<meta property="og:updated_time" content="2017-12-28T18:41:14.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我理解中的左值,右值和引用">
-<meta name="twitter:description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.">
+<meta name="twitter:description" content="概述c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 续命.
+
+
+具名的,可取址的称为左值
+表达式,字面常量 &amp;quot;abc&amp;quot;,2,true为纯右值
+函数返回值,lambda表达式等为将亡值
+
+
+左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。
+无论是左值引用还是右值引用">
 
 
 
@@ -323,7 +350,6 @@
 
       
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)<br>将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 <strong><em>续命</em></strong>.</p>
-<a id="more"></a>
 <blockquote>
 <ul>
 <li>具名的,可取址的称为左值</li>
@@ -336,7 +362,8 @@
 <hr>
 <h1 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T &amp;&amp; a = ReturnRvalue();</span><br></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T b = ReturnRvalue();</span><br></pre></td></tr></table></figure>
-<p>函数<code>ReturnRvalue()</code>返回一个临时变量(<strong>将亡值</strong>).</p>
+<p>函数<code>ReturnRvalue()</code>返回一个临时变量(**将亡值</p>
+<a id="more"></a>
 <p>下面的b是常用的做法,把临时变量赋值给b,<code>ReturnRvalue()</code>的生命周期在本行被执行后终结.</p>
 <p>上面的a是右值引用,他绑定了临时变量,因为临时变量并不会再语句结束后死去,只要a活着,他就不会死.</p>
 <p><strong><em>值得注意的是,如果函数的返回值是一个类的对象,那么当另一个函数直接调用此函数返回值时,如果是值引用会调用拷贝构造和析构函数.</em></strong></p>

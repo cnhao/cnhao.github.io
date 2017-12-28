@@ -96,19 +96,34 @@
 
 
 <meta name="description" content="移动语义关于左右值得问题看我另一篇文章.
-移动语义是一种语义.被用来">
+移动语义是一种语义.被用来
+对右值充分利用提高效率
+譬如移动构造函数等.
+
+典型应用
+1234567template &amp;lt;class T&amp;gt;void swap(T &amp;amp;a, T &amp;amp;b)&amp;#123;    T tmp(std::move(a));    a = std::move(b);    b = std::move(tmp);&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通俗易懂之移动语义与完美转发">
 <meta property="og:url" content="http://cnhao.com/2017/07/20/moveforward/index.html">
 <meta property="og:site_name" content="艾泽拉斯">
 <meta property="og:description" content="移动语义关于左右值得问题看我另一篇文章.
-移动语义是一种语义.被用来">
+移动语义是一种语义.被用来
+对右值充分利用提高效率
+譬如移动构造函数等.
+
+典型应用
+1234567template &amp;lt;class T&amp;gt;void swap(T &amp;amp;a, T &amp;amp;b)&amp;#123;    T tmp(std::move(a));    a = std::move(b);    b = std::move(tmp);&amp;#">
 <meta property="og:image" content="https://i.loli.net/2017/12/27/5a43960f03869.png">
-<meta property="og:updated_time" content="2017-12-28T18:29:54.118Z">
+<meta property="og:updated_time" content="2017-12-28T18:40:46.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通俗易懂之移动语义与完美转发">
 <meta name="twitter:description" content="移动语义关于左右值得问题看我另一篇文章.
-移动语义是一种语义.被用来">
+移动语义是一种语义.被用来
+对右值充分利用提高效率
+譬如移动构造函数等.
+
+典型应用
+1234567template &amp;lt;class T&amp;gt;void swap(T &amp;amp;a, T &amp;amp;b)&amp;#123;    T tmp(std::move(a));    a = std::move(b);    b = std::move(tmp);&amp;#">
 <meta name="twitter:image" content="https://i.loli.net/2017/12/27/5a43960f03869.png">
 
 
@@ -329,12 +344,12 @@
       
         <h1 id="移动语义"><a href="#移动语义" class="headerlink" title="移动语义"></a>移动语义</h1><p><del>关于左右值得问题看我另一篇文章</del>.</p>
 <p>移动语义是一种语义.被用来</p>
-<a id="more"></a>
 <p>对右值充分利用提高效率</p>
 <p>譬如移动构造函数等.</p>
 <p><img src="https://i.loli.net/2017/12/27/5a43960f03869.png" alt=""></p>
 <p>典型应用</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">template &lt;class T&gt;</span><br><span class="line">void swap(T &amp;a, T &amp;b)</span><br><span class="line">&#123;</span><br><span class="line">    T tmp(std::move(a));</span><br><span class="line">    a = std::move(b);</span><br><span class="line">    b = std::move(tmp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h1 id="move-amp-amp-forward"><a href="#move-amp-amp-forward" class="headerlink" title="move &amp;&amp; forward"></a>move &amp;&amp; forward</h1><p>move函数把左值转为右值引用,此值生命周期并未结束.</p>
 <p>基本等同于<code>static_cast&lt;T&amp;&amp;&gt;(lvalue);</code></p>
 <blockquote>

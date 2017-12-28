@@ -440,16 +440,16 @@
     <link href="http://cnhao.com/2017/07/20/moveforward/"/>
     <id>http://cnhao.com/2017/07/20/moveforward/</id>
     <published>2017-07-20T12:41:59.000Z</published>
-    <updated>2017-12-28T18:29:54.118Z</updated>
+    <updated>2017-12-28T18:40:46.259Z</updated>
     
     <content type="html">&lt;h1 id=&quot;移动语义&quot;&gt;&lt;a href=&quot;#移动语义&quot; class=&quot;headerlink&quot; title=&quot;移动语义&quot;&gt;&lt;/a&gt;移动语义&lt;/h1&gt;&lt;p&gt;&lt;del&gt;关于左右值得问题看我另一篇文章&lt;/del&gt;.&lt;/p&gt;
 &lt;p&gt;移动语义是一种语义.被用来&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;对右值充分利用提高效率&lt;/p&gt;
 &lt;p&gt;譬如移动构造函数等.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://i.loli.net/2017/12/27/5a43960f03869.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;典型应用&lt;/p&gt;
 &lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;template &amp;lt;class T&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;void swap(T &amp;amp;a, T &amp;amp;b)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    T tmp(std::move(a));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    a = std::move(b);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    b = std::move(tmp);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;move-amp-amp-forward&quot;&gt;&lt;a href=&quot;#move-amp-amp-forward&quot; class=&quot;headerlink&quot; title=&quot;move &amp;amp;&amp;amp; forward&quot;&gt;&lt;/a&gt;move &amp;amp;&amp;amp; forward&lt;/h1&gt;&lt;p&gt;move函数把左值转为右值引用,此值生命周期并未结束.&lt;/p&gt;
 &lt;p&gt;基本等同于&lt;code&gt;static_cast&amp;lt;T&amp;amp;&amp;amp;&amp;gt;(lvalue);&lt;/code&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -472,6 +472,11 @@
     
       &lt;h1 id=&quot;移动语义&quot;&gt;&lt;a href=&quot;#移动语义&quot; class=&quot;headerlink&quot; title=&quot;移动语义&quot;&gt;&lt;/a&gt;移动语义&lt;/h1&gt;&lt;p&gt;&lt;del&gt;关于左右值得问题看我另一篇文章&lt;/del&gt;.&lt;/p&gt;
 &lt;p&gt;移动语义是一种语义.被用来&lt;/p&gt;
+&lt;p&gt;对右值充分利用提高效率&lt;/p&gt;
+&lt;p&gt;譬如移动构造函数等.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2017/12/27/5a43960f03869.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;典型应用&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;template &amp;lt;class T&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;void swap(T &amp;amp;a, T &amp;amp;b)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    T tmp(std::move(a));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    a = std::move(b);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    b = std::move(tmp);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -485,10 +490,9 @@
     <link href="http://cnhao.com/2017/07/11/%E6%88%91%E7%90%86%E8%A7%A3%E4%B8%AD%E7%9A%84%E5%B7%A6%E5%80%BC-%E5%8F%B3%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8/"/>
     <id>http://cnhao.com/2017/07/11/我理解中的左值-右值和引用/</id>
     <published>2017-07-11T05:40:28.000Z</published>
-    <updated>2017-12-28T18:29:55.344Z</updated>
+    <updated>2017-12-28T18:41:14.221Z</updated>
     
     <content type="html">&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;具名的,可取址的称为左值&lt;/li&gt;
@@ -501,7 +505,8 @@
 &lt;hr&gt;
 &lt;h1 id=&quot;右值引用&quot;&gt;&lt;a href=&quot;#右值引用&quot; class=&quot;headerlink&quot; title=&quot;右值引用&quot;&gt;&lt;/a&gt;右值引用&lt;/h1&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T &amp;amp;&amp;amp; a = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T b = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;函数&lt;code&gt;ReturnRvalue()&lt;/code&gt;返回一个临时变量(&lt;strong&gt;将亡值&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;函数&lt;code&gt;ReturnRvalue()&lt;/code&gt;返回一个临时变量(**将亡值&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;下面的b是常用的做法,把临时变量赋值给b,&lt;code&gt;ReturnRvalue()&lt;/code&gt;的生命周期在本行被执行后终结.&lt;/p&gt;
 &lt;p&gt;上面的a是右值引用,他绑定了临时变量,因为临时变量并不会再语句结束后死去,只要a活着,他就不会死.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;值得注意的是,如果函数的返回值是一个类的对象,那么当另一个函数直接调用此函数返回值时,如果是值引用会调用拷贝构造和析构函数.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -521,6 +526,19 @@
     <summary type="html">
     
       &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;c++11中所有的值分为三种,左值,右值,和将亡值(eXpiring Value)&lt;br&gt;将亡值的命名是很准确的,也是右值的一种,右值引用就是为了给他 &lt;strong&gt;&lt;em&gt;续命&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;具名的,可取址的称为左值&lt;/li&gt;
+&lt;li&gt;表达式,字面常量 &lt;code&gt;&amp;quot;abc&amp;quot;,2,true&lt;/code&gt;为纯右值&lt;/li&gt;
+&lt;li&gt;函数返回值,lambda表达式等为将亡值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无论是左值引用还是右值引用,都必须在立即初始化.因为他们并不拥有绑定对象的内存空间只是一个别名.&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;右值引用&quot;&gt;&lt;a href=&quot;#右值引用&quot; class=&quot;headerlink&quot; title=&quot;右值引用&quot;&gt;&lt;/a&gt;右值引用&lt;/h1&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T &amp;amp;&amp;amp; a = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;T b = ReturnRvalue();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;函数&lt;code&gt;ReturnRvalue()&lt;/code&gt;返回一个临时变量(**将亡值&lt;/p&gt;
     
     </summary>
     
